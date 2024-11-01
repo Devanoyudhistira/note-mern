@@ -55,14 +55,6 @@ function App() {
       "bg-dark": "bg-green-800",
     },
     {
-      agenda: "belajar assembly",
-      type: "note",
-      blog: "belahar laravel melalu video cahnnel youtube pak sandhika galih adipisicing elit. Cum quod consectetur beatae",
-      "date-created": "12-12-24",
-      "bg-light": "bg-green-400",
-      "bg-dark": "bg-green-800",
-    },
-    {
       agenda: "tawarkan jasa",
       type: "project",
       description:
@@ -72,19 +64,6 @@ function App() {
       "date-target": "20-12-24",
       "bg-light": "bg-orange-400",
       "bg-dark": "bg-orange-800",
-    },
-    {
-      agenda: "belajar assembly",
-      type: "to-do-list",
-      list: [
-        { task: "array", done: true },
-        { task: "integer", done: false },
-        { task: "assembly object", done: true },
-        { task: "ruby on rails", done: false },
-      ],
-      "date-created": "12-12-24",
-      "bg-light": "bg-sky-400",
-      "bg-dark": "bg-sky-800",
     },
     {
       agenda: "belajar ruby",
@@ -110,7 +89,7 @@ function App() {
         style="py-2 bg-sky-500/20 outline-none border-2 border-sky-600/60 rounded-2xl px-1 text-xl w-full h-full"
       />
       <Mainnote>
-        <Sectionnote notedata={notedata} notetitle={"to-to-list"} type={"to-do-list"} />
+        <Sectionnote notedata={notedata} notetitle={"to-do-list"} type={"to-do-list"} />
         <Sectionnote notedata={notedata} notetitle={"project"} type={"project"} />
         <Sectionnote notedata={notedata} notetitle={"note"} type={"note"} />
       </Mainnote>
