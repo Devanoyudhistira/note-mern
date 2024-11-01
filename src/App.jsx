@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
@@ -5,72 +6,102 @@ import Navbar from "./components/navbar";
 import Input from "./components/input";
 import Mainnote from "./components/mainnote";
 import Cardnote from "./components/cardnote";
-
+import Footer from "./components/footer";
+import Addbutton from "./components/addbutton";
+import Sectionnote from "./components/sectionnote";
+import Note from "./components/note";
+import Todo from "./components/todo";
+import Projectlist from "./components/projectlist";
 function App() {
   const [notedata, setnotedata] = useState([
     {
       agenda: "belajar ts",
       type: "to-do-list",
-      list:["type checking","object orientation programing","make simple project"],
+      list: [
+        { task: "type variable", done: true },
+        { task: "array of object", done: true },
+        { task: "belajar tsx", done: true },
+        { task: "object oriented programn", done: false },
+      ],
       "date-created": "12-12-24",
-      "bg-light":"bg-sky-400",
-      "bg-dark":"bg-sky-800"
-    },
-    {
-      agenda: "belajar assembly",
-      type: "to-do-list",
-      list:["type checking","object orientation programing","make simple project"],
-      "date-created": "12-12-24",
-      "bg-light":"bg-sky-400",
-      "bg-dark":"bg-sky-800"
+      "bg-light": "bg-sky-400",
+      "bg-dark": "bg-sky-800",
     },
     {
       agenda: "belajar php",
       type: "project",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quod consectetur beatae magnam unde dolores aut ipsam fugiat rem voluptatibus? dbadjdha bd dahdhdad  hdaodhoadha",
-      percentage:`${20}%`,
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quod consectetur beatae magnam unde dolores aut ipsam fugiat rem voluptatibus? dbadjdha bd dahdhdad  hdaodhoadha",
+      percentage: `${20}%`,
       "date-created": "12-12-24",
       "date-target": "20-12-24",
-      "bg-light":"bg-orange-400",
-      "bg-dark":"bg-orange-800"
-    },
-    {
-      agenda: "tawarkan jasa",
-      type: "project",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quod consectetur beatae magnam unde dolores aut ipsam fugiat rem voluptatibus? dbadjdha bd dahdhdad  hdaodhoadha",
-      percentage:`${20}%`,
-      "date-created": "12-12-24",
-      "date-target": "20-12-24",
-      "bg-light":"bg-orange-400",
-      "bg-dark":"bg-orange-800"
-    },
-    {
-      agenda: "belajar golang",
-      type: "note",
-      blog: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quod consectetur beatae magnam unde dolores aut ipsam fugiat rem voluptatibus?",
-      "date-created": "12-12-24",
-      "bg-light":"bg-green-400",
-      "bg-dark":"bg-green-800"
+      "bg-light": "bg-orange-400",
+      "bg-dark": "bg-orange-800",
     },
     {
       agenda: "belajar laravel",
       type: "note",
-      blog: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quod consectetur beatae magnam unde dolores aut ipsam fugiat rem voluptatibus?",
+      blog: "belahar laravel melalu video cahnnel youtube pak sandhika galih adipisicing elit. Cum quod consectetur beatae",
       "date-created": "12-12-24",
-      "bg-light":"bg-green-400",
-      "bg-dark":"bg-green-800"
+      "bg-light": "bg-green-400",
+      "bg-dark": "bg-green-800",
+    },
+    {
+      agenda: "belajar assembly",
+      type: "note",
+      blog: "belahar laravel melalu video cahnnel youtube pak sandhika galih adipisicing elit. Cum quod consectetur beatae",
+      "date-created": "12-12-24",
+      "bg-light": "bg-green-400",
+      "bg-dark": "bg-green-800",
+    },
+    {
+      agenda: "belajar assembly",
+      type: "note",
+      blog: "belahar laravel melalu video cahnnel youtube pak sandhika galih adipisicing elit. Cum quod consectetur beatae",
+      "date-created": "12-12-24",
+      "bg-light": "bg-green-400",
+      "bg-dark": "bg-green-800",
+    },
+    {
+      agenda: "tawarkan jasa",
+      type: "project",
+      description:
+        "membuat alat untuk membantu eluarga dan teman deat ibu saya budhe teman saya",
+      percentage: `${20}%`,
+      "date-created": "12-12-24",
+      "date-target": "20-12-24",
+      "bg-light": "bg-orange-400",
+      "bg-dark": "bg-orange-800",
+    },
+    {
+      agenda: "belajar assembly",
+      type: "to-do-list",
+      list: [
+        { task: "array", done: true },
+        { task: "integer", done: false },
+        { task: "assembly object", done: true },
+        { task: "ruby on rails", done: false },
+      ],
+      "date-created": "12-12-24",
+      "bg-light": "bg-sky-400",
+      "bg-dark": "bg-sky-800",
     },
     {
       agenda: "belajar ruby",
       type: "to-do-list",
-      list:["array","intger","ruby object","ruby on rails "],
+      list: [
+        { task: "array", done: true },
+        { task: "integer", done: false },
+        { task: "ruby object", done: true },
+        { task: "ruby on rails", done: false },
+      ],
       "date-created": "12-12-24",
-      "bg-light":"bg-sky-400",
-      "bg-dark":"bg-sky-800"
+      "bg-light": "bg-sky-400",
+      "bg-dark": "bg-sky-800",
     },
   ]);
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col px-2 items-center">
       <Navbar />
       <Input
         identity="searchnote"
@@ -79,20 +110,13 @@ function App() {
         style="py-2 bg-sky-500/20 outline-none border-2 border-sky-600/60 rounded-2xl px-1 text-xl w-full h-full"
       />
       <Mainnote>
-        {notedata.map((e) => 
-          <Cardnote
-            key={e.agenda}
-            noteType={e.type}
-            list={e.list}
-            textblog={e.blog}
-            bglight={e["bg-light"]}
-            datecreated={e["date-created"]}
-            dateended={e["date-target"]}
-            projectdesc={e.description}
-            texttitle={e.agenda}
-          />
-        )}
+        <Sectionnote notedata={notedata} notetitle={"to-to-list"} type={"to-do-list"} />
+        <Sectionnote notedata={notedata} notetitle={"project"} type={"project"} />
+        <Sectionnote notedata={notedata} notetitle={"note"} type={"note"} />
       </Mainnote>
+      <Footer>
+        <Addbutton />
+      </Footer>
     </div>
   );
 }
