@@ -1,15 +1,25 @@
+/* eslint-disable no-unused-vars */
+import { useState } from "react";
+
 /* eslint-disable react/prop-types */
 export default function Todo({ list, title }) {
-  const taskdone = list.filter((e) => e.done).length;
-  const totaltask = list.length
-  console.log(taskdone);
+  const [taskdone,settaskdone] = useState(list.filter((e) => e.done).length)
+  const [totaltask,settotaltask] =useState( list.length)
+  const tasklist = taskdone === 0;
   return (
     <ol className="text-left bg-blue-400/70 mt-1 w-40 h-14 border-2 box-content border-black px-1 py-1 marker:text-red-500  overflow-hidden font-inter list-disc text-black flex flex-col justify-evenly rounded-xl font-semibold">
       <div className="w-full flex justify-self-start -mt-4 self-start items-center align-center justify-between ">
         <h1 className="truncate text-xl ">{title}</h1>
-        <p className="text-lg font-inter font-extrabold" ><span className="text-green-600" >{taskdone}/</span><span className="text-red-600" >{totaltask}</span> </p>
+        {tasklist ? (
+         ""
+        ) : (
+          <p className="text-lg font-inter font-extrabold">
+            <span className="text-green-600">{taskdone}/</span>
+            <span className="text-red-600">{totaltask}</span>{" "}
+          </p>
+        )}
       </div>
-      {list.map((e, i) => {
+      { tasklist ? <span className="text-green-400 text-xl -mt-4 font-inter font-bold">done</span> : list.map((e, i) => {
         if (i === 0) {
           return (
             <li
