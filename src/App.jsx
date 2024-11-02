@@ -81,7 +81,7 @@ function App() {
     },
   ]);
   return (
-    <div className="flex flex-col px-2 items-center">
+    <div className="flex flex-col h-[98vh] justify-between px-2 items-center">
       <Navbar />
       <Input
         identity="searchnote"
@@ -90,7 +90,7 @@ function App() {
         style="py-2 bg-sky-500/20 outline-none border-2 border-sky-600/60 rounded-2xl px-1 text-xl w-full h-full"
       />
       <Mainnote>
-        <Sectionnote notedata={notedata} notetitle={"to-do-list"} icon={<Star className="inline-block" />} type={"to-do-list"} />
+        <Sectionnote notedata={notedata} notetitle={"to-do-list"} icon={<Star className="inline-block" fill="red" color="red" />} type={"to-do-list"} />
         <Sectionnote notedata={notedata} notetitle={"project"} type={"project"} icon={<Pencil className="inline-block"/>} />
         <Sectionnote notedata={notedata} notetitle={"note"} type={"note"} icon={<Pencil className="inline-block"/>}  />
       </Mainnote>
