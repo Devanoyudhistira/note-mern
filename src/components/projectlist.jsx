@@ -8,8 +8,8 @@ export default function Projectlist({ projectdesc, title, percentage }) {
   return (
     <div
       className={`w-60 ${
-        projectTrack ? "border-green-400" : "border-black"
-      } border-2 box-content  rounded-3xl flex flex-col px-3 py-1 bg-orange-400 text-left overflow-hidden  h-16 text-black`}
+        projectTrack ? "border-green-500" : "border-black"
+      } border-2 box-content  rounded-3xl flex flex-col px-3 py-1 bg-orange-200/50 text-left overflow-hidden  h-16 text-black`}
     >
       <div className="w-full flex justify-between">
         <h1 className=" text-xl font-bold font-inter truncate"> {title} </h1>
@@ -25,7 +25,7 @@ export default function Projectlist({ projectdesc, title, percentage }) {
       <p className="text-md font-inter truncate font-medium ">
         {" "}
         {projectTrack ? (
-          <span className="text-green-400 font-inter font-bold">
+          <span className="text-green-400 font-inter font-bold capitalize">
             project done
           </span>
         ) : (

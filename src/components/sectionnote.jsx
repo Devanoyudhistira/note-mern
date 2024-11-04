@@ -3,7 +3,7 @@ import Projectlist from "./projectlist";
 import Todo from "./todo";
 
 /* eslint-disable react/prop-types */
-export default function Sectionnote({ notedata, type, notetitle, icon }) {
+export default function Sectionnote({ clickhandler,notedata, type, notetitle, icon }) {
   return (
     <div id="horizontal" className="overflow-x-scroll relative">
       <h1 className="absolute -top-2 font-bebas tracking-wider mt-2 text-xl">
@@ -11,7 +11,7 @@ export default function Sectionnote({ notedata, type, notetitle, icon }) {
         {notetitle} {icon}{" "}
       </h1>
       <section className=" w-max mt-2 shadow-[1px_3px_10px_black grid grid-flow-col auto-cols-max mb-2 px-2 pt-5 justify-start h-max gap-4">
-        {notedata.map((e) => {
+        {notedata !== undefined ? notedata.map((e) => {
           if (type === "project") {
             return (
               e.description !== undefined && (
@@ -26,10 +26,10 @@ export default function Sectionnote({ notedata, type, notetitle, icon }) {
             );
           } else if (type === "to-do-list") {
             return (
-              e.list !== undefined && <Todo list={e.list} title={e.agenda} />
+              e.list !== undefined && <Todo clickhandler={clickhandler} list={e.list} title={e.agenda} />
             );
           }
-        })}
+        }) : <p className="text-3xl font-bold" > its fetching </p>}
       </section>
     </div>
   );
