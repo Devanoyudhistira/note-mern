@@ -2,10 +2,10 @@
 
 import { Plus } from "react-bootstrap-icons";
 
-export default function Addbutton() {
+export default function Addbutton({openedit}) {
   return (
-    <button className={`rounded-full -mt-12 mr-2 justify-self-end bg-slate-950 text-center self-end w-12 h-12 p-1`}>
-      <h1 className="font-black text-4xl ml-1">
+    <button onClick={openedit} className={`rounded-full mr-2 justify-self-end bg-slate-950 text-center self-end w-12 h-12 p-1`}>
+      <h1 className="font-black text-4xl ml-[2px]">
         {" "}
         <Plus className="text-white" />{" "}
       </h1>

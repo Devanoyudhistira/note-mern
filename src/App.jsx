@@ -12,10 +12,12 @@ import { Pencil, Star } from "react-bootstrap-icons";
 import Notedoc from "./components/notedoc";
 import { AnimatePresence } from "framer-motion";
 import Projectdoc from "./projectdoc";
+import Noteform from "./components/noteform";
 
 function App() {
   const [noteopen, setnoteopen] = useState(false);
   const [projectopen, setprojectopen] = useState(false);
+  const [isformopen, setformopen] = useState(false);
   const [notedata, setnotedata] = useState();
   const [projectdata, setprojectdata] = useState({ text: "", title: "", date: "" });
   const [notetype, setnotetype] = useState({ text: "", title: "", date: "" });
@@ -30,6 +32,8 @@ function App() {
     getnote();
   }, []);
 
+
+
   function notedocopen(text, title, date) {
     setnoteopen(true);
     setnotetype({ text: text, title: title, date: date });
@@ -41,6 +45,7 @@ function App() {
   return (
     <div className="flex flex-col h-[95vh] justify-start px-2 items-center">
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+      { isformopen && <Noteform closehandler={() => setformopen(false)} />}
         {noteopen && (
           <Notedoc
             notetext={notetype.text}
@@ -63,7 +68,7 @@ function App() {
         identity="searchnote"
         labeltext="search"
         inputType="search"
-        style="py-2 bg-sky-500/20 outline-none border-2 border-sky-600/60 rounded-2xl px-1 text-xl w-full h-full"
+        style="py-2 bg-white outline-none border-2 border-black rounded-2xl px-1 text-xl w-full h-full"
       />
       <Mainnote>
         <Sectionnote
@@ -89,7 +94,7 @@ function App() {
         />
       </Mainnote>
       <Footer>
-        <Addbutton />
+        <Addbutton openedit={() => setformopen(true)} />
       </Footer>
     </div>
   );
