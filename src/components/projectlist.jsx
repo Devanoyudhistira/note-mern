@@ -3,10 +3,16 @@ import { useState } from "react";
 import { Check } from "react-bootstrap-icons";
 
 /* eslint-disable react/prop-types */
-export default function Projectlist({ projectdesc, title, percentage }) {
+export default function Projectlist({
+  projectdesc,
+  title,
+  percentage,
+  clickhandler,
+}) {
   const [projectTrack, setprojecttrack] = useState(percentage === 100);
   return (
     <div
+      onClick={clickhandler}
       className={`w-60 ${
         projectTrack ? "border-green-500" : "border-black"
       } border-2 box-content  rounded-3xl flex flex-col px-3 py-1 bg-orange-200/50 text-left overflow-hidden  h-16 text-black`}

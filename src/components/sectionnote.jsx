@@ -15,13 +15,13 @@ export default function Sectionnote({ clickhandler,notedata, type, notetitle, ic
           if (type === "project") {
             return (
               e.description !== undefined && (
-                <Projectlist projectdesc={e.description} percentage={e.percentage} title={e.agenda} />
+                <Projectlist clickhandler={() => clickhandler(e.description,e.agenda,e["date_created"])} projectdesc={e.description} percentage={e.percentage} title={e.agenda} />
               )
             );
           } else if (type === "note") {
             return (
               e.blog !== undefined && (
-                <Note textblog={e.blog} title={e.agenda} />
+                <Note textblog={e.blog} clickhandler={() => clickhandler(e.blog,e.agenda,e["date_created"])} title={e.agenda} />
               )
             );
           } else if (type === "to-do-list") {
