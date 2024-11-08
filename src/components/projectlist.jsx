@@ -15,7 +15,7 @@ export default function Projectlist({
       onClick={clickhandler}
       className={`w-60 ${
         projectTrack ? "border-green-500" : "border-black"
-      } border-2 box-content  rounded-3xl flex flex-col px-3 py-1 bg-orange-200/50 text-left overflow-hidden  h-16 text-black`}
+      } border-2 box-content cursor-pointer rounded-3xl flex flex-col px-3 py-1 bg-orange-200/50 text-left overflow-hidden  h-16 text-black`}
     >
       <div className="w-full flex justify-between">
         <h1 className=" text-xl font-bold font-inter truncate"> {title} </h1>

@@ -1,26 +1,18 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
-// import { motion } from "framer-motion";
-import Navbar from "./components/navbar";
-import Input from "./components/input";
-import Mainnote from "./components/mainnote";
-import Footer from "./components/footer";
-import Addbutton from "./components/addbutton";
-import Sectionnote from "./components/sectionnote";
-import { Pencil, Star } from "react-bootstrap-icons";
-import Notedoc from "./components/notedoc";
-import { AnimatePresence } from "framer-motion";
-import Projectdoc from "./projectdoc";
-import Noteform from "./components/noteform";
+import Mainpage from "./components/mainpage";
+import { useAuth0 } from "@auth0/auth0-react";
+import image from "./components/profile-user.png"
+import Loginpage from "./components/loginpage";
 
 function App() {
-  const [noteopen, setnoteopen] = useState(false);
-  const [projectopen, setprojectopen] = useState(false);
-  const [isformopen, setformopen] = useState(false);
+  const [nickname,setnickname] = useState("")
+  
+  const [isuser, setuser] = useState(false)
   const [notedata, setnotedata] = useState();
-  const [projectdata, setprojectdata] = useState({ text: "", title: "", date: "" });
-  const [notetype, setnotetype] = useState({ text: "", title: "", date: "" });
+  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0()
+  console.log(notedata)
   useEffect(() => {
     async function getnote() {
       await fetch("https://noteapi-pink.vercel.app/getnote", {
@@ -29,73 +21,35 @@ function App() {
         .then((res) => res.json())
         .then((result) => setnotedata(result));
     }
-    getnote();
-  }, []);
+    if (isAuthenticated) {
+      getnote();
+    }
+  }, [isAuthenticated]);
 
-
-
-  function notedocopen(text, title, date) {
-    setnoteopen(true);
-    setnotetype({ text: text, title: title, date: date });
+  async function loginuser() {
+    if(isAuthenticated){
+      console.log(user)
+    await fetch("https://noteapi-pink.vercel.app/auth/login",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            username:user.nickname,
+            nickname:nickname
+        })
+      }
+    ).then(res => res.json()).then(res => res)}
   }
-  function projectdocopen(text,title, date) {
-    setprojectopen(true);
-    setprojectdata({ text: text, title: title, date: date });
-  }
+  loginuser()
+
   return (
     <div className="flex flex-col h-[95vh] justify-start px-2 items-center">
-      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-      { isformopen && <Noteform closehandler={() => setformopen(false)} />}
-        {noteopen && (
-          <Notedoc
-            notetext={notetype.text}
-            notetitle={notetype.title}
-            notedate={notetype.date}
-            closehandler={() => setnoteopen(false)}
-          />
-        )}
-        {projectopen && (
-          <Projectdoc
-            projecttext={projectdata.text}
-            projecttitle={projectdata.title}
-            projectdate={projectdata.date}
-            closehandler={() => setprojectopen(false)}
-          />
-        )}
-      </AnimatePresence>
-      <Navbar />
-      <Input
-        identity="searchnote"
-        labeltext="search"
-        inputType="search"
-        style="py-2 bg-white outline-none border-2 border-black rounded-2xl px-1 text-xl w-full h-full"
-      />
-      <Mainnote>
-        <Sectionnote
-          clickhandler={() => console.log("note")}
-          notedata={notedata}
-          notetitle={"to-do-list"}
-          icon={<Star className="inline-block" fill="gold" color="gold" />}
-          type={"to-do-list"}
-        />
-        <Sectionnote
-          clickhandler={projectdocopen}
-          notedata={notedata}
-          notetitle={"project"}
-          type={"project"}
-          icon={<Pencil className="inline-block" />}
-        />
-        <Sectionnote
-          clickhandler={notedocopen}
-          notedata={notedata}
-          notetitle={"note"}
-          type={"note"}
-          icon={<Pencil className="inline-block" />}
-        />
-      </Mainnote>
-      <Footer>
-        <Addbutton openedit={() => setformopen(true)} />
-      </Footer>
+      {isAuthenticated ?
+        <Mainpage image={user.picture} name={user.name || user.nickname} logout={() => logout({ logoutParams: { returnTo: window.location.origin } })} notedata={notedata}   /> :
+        <Loginpage loginWithRedirect={loginWithRedirect} />
+      }
     </div>
   );
 }

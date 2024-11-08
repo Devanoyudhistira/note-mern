@@ -20,3 +20,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     -ms-overflow-style: none;  
     scrollbar-width: none;  
   }  
+  .listicon{
+    @apply font-inter font-medium text-base
+  }
