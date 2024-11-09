@@ -21,7 +21,7 @@ export default function Navbar({ logout, name, image }) {
             </motion.div>
           </Backdrop>}
       </AnimatePresence>
-      <h1 className="font-bebas ml-1 text-2xl tracking-wider" >good morning {name} </h1>
+      <h1 className="font-bebas ml-1 text-2xl tracking-wider" >hello {name} </h1>
       <img
         onClick={() => setishownav(!isshownav)}
         src={image}

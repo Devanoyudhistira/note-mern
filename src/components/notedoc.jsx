@@ -23,13 +23,13 @@ export default function Notedoc({
       </div>
       <div className="w-full flex items-center justify-between">
         {" "}
-        <h1 className="font-poppins text-3xl font-bold text-white">
+        <h1 className="font-poppins text-3xl font-bold ">
           {notetitle}
-          <p className="font-inter text-sm text-white font-medium" >
+          <p className="font-inter text-sm  font-medium" >
           {notetext.length} character
           </p>
         </h1>
-        <p className="font-inter text-sm text-white font-medium">
+        <p className="font-inter text-sm  font-medium">
           {" "}
           {notedate}  {" "}
         </p>

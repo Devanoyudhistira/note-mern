@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import LoadingSpinner from "./loadingpsinner";
 export default function Mainnote({children,data,identity}){
-    
+
     return(
         data !== undefined ?
          <motion.main className="w-screen h-max py-2 px-2 box-border mt-1 flex gap-y-1 flex-col">

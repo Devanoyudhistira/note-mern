@@ -10,7 +10,6 @@ function App() {
   const [isuser, setuser] = useState(false)
   const [notedata, setnotedata] = useState();
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0()
-  console.log(notedata)
   useEffect(() => {
     async function getnote() {
       await fetch("https://noteapi-pink.vercel.app/getnote", {
@@ -26,7 +25,6 @@ function App() {
 
   async function loginuser() {
     if(isAuthenticated){
-      console.log(user)
     await fetch("https://noteapi-pink.vercel.app/auth/login",
       {
         method:"POST",

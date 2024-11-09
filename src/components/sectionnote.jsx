@@ -15,7 +15,7 @@ export default function Sectionnote({ clickhandler,notedata, type, notetitle, ic
           if (type === "project") {
             return (
               e.description !== undefined && (
-                <Projectlist clickhandler={() => clickhandler(e.description,e.agenda,e["date_created"])} projectdesc={e.description} percentage={e.percentage} title={e.agenda} />
+                <Projectlist clickhandler={() => clickhandler(e.description,e.agenda,e["date_created"],e.percentage,e.checkpoint)} projectdesc={e.description} percentage={e.percentage} title={e.agenda} />
               )
             );
           } else if (type === "note") {

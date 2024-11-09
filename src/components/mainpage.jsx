@@ -23,11 +23,11 @@ export default function Mainpage({ image, name, logout, notedata }) {
         setnoteopen(true);
         setnotetype({ text: text, title: title, date: date });
     }
-    function projectdocopen(text, title, date) {
+    function projectdocopen(text, title, date,percentage,checkpoint) {
         setprojectopen(true);
-        setprojectdata({ text: text, title: title, date: date });
+        setprojectdata({ text: text, title: title, date: date,checkpoint:checkpoint,percentage:percentage });
     }
-    const [projectdata, setprojectdata] = useState({ text: "", title: "", date: "" });
+    const [projectdata, setprojectdata] = useState({ text: "", title: "", date: "" ,percentage:"",checkpoint:""});
     const [notetype, setnotetype] = useState({ text: "", title: "", date: "" });
 
     return (
@@ -47,6 +47,8 @@ export default function Mainpage({ image, name, logout, notedata }) {
                         projecttext={projectdata.text}
                         projecttitle={projectdata.title}
                         projectdate={projectdata.date}
+                        projectpercent={projectdata.percentage}
+                        checkpoint={projectdata.checkpoint}
                         closehandler={() => setprojectopen(false)}
                     />
                 )}
