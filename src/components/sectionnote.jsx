@@ -11,7 +11,7 @@ export default function Sectionnote({ clickhandler,notedata, type, notetitle, ic
         {notetitle} {icon}{" "}
       </h1>
       <section className=" w-max mt-2 shadow-[1px_3px_10px_black grid grid-flow-col auto-cols-max mb-2 px-2 pt-5 justify-start h-max gap-4">
-        {notedata !== undefined ? notedata.map((e) => {
+        {notedata !== undefined && notedata.map((e) => {
           if (type === "project") {
             return (
               e.description !== undefined && (
@@ -29,7 +29,7 @@ export default function Sectionnote({ clickhandler,notedata, type, notetitle, ic
               e.list !== undefined && <Todo clickhandler={clickhandler} list={e.list} title={e.agenda} />
             );
           }
-        }) : <p className="text-3xl font-bold" > its fetching </p>}
+        })}
       </section>
     </div>
   );

@@ -58,7 +58,8 @@ export default function Mainpage({ image, name, logout, notedata }) {
                 inputType="search"
                 style="py-2 bg-white outline-none border-2 border-black rounded-2xl px-1 text-xl w-full h-full"
             />
-            <Mainnote>
+            <Mainnote data={notedata} identity={name} >
+                
                 <Sectionnote
                     clickhandler={() => console.log("note")}
                     notedata={notedata}

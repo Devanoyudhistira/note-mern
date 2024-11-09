@@ -7,8 +7,6 @@ import image from "./components/profile-user.png"
 import Loginpage from "./components/loginpage";
 
 function App() {
-  const [nickname,setnickname] = useState("")
-  
   const [isuser, setuser] = useState(false)
   const [notedata, setnotedata] = useState();
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0()
@@ -37,7 +35,7 @@ function App() {
         },
         body:JSON.stringify({
             username:user.nickname,
-            nickname:nickname
+            nickname:user.name
         })
       }
     ).then(res => res.json()).then(res => res)}
