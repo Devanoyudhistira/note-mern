@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import { motion } from "framer-motion";
 import { ChevronLeft } from "react-bootstrap-icons";
-
+import Notewrapper from "./notewrapper";
+import { useState } from "react";
+import Backbutton from "./backbutton";
 export default function Projectdoc({
   closehandler,
   projecttext,
@@ -10,20 +11,15 @@ export default function Projectdoc({
   projectpercent,
   checkpoint
 }) {
-  console.log(checkpoint)
+  const [taskstatus,settaskstatus] = useState(checkpoint)
+  const [count,setcount] = useState(0)
+  const task = taskstatus.length
+  const percentage =  100 / task
   return (
-    <motion.div
-      initial={{ scale: 0 }}
-      exit={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1 }}
-      className="w-screen h-screen fixed z-50 top-0 bg-orange-300"
+    <Notewrapper
+    notecolor="bg-orange-300"
     >
-      <div className="flex justify-start w-screen h-8">
-        <button onClick={closehandler}>
-          {" "}
-          <ChevronLeft className="text-2xl" />
-        </button>
-      </div>
+      <Backbutton closehandler={closehandler} />
       <div className="w-full mb-2 border-b-black border-b-2 grid grid-cols-2 items-center content-between justify-between" >
         {" "}
         <h1 className="text-2xl font-poppins font-semibold" > {projecttitle} </h1>
@@ -31,6 +27,15 @@ export default function Projectdoc({
         <p className="text-lg font-poppins font-light" > {projectdate} </p>
       </div>
       <div className="text-lg font-inter" >{projecttext} </div>
-    </motion.div>
+      <ul>
+      {checkpoint.map(e => {
+        return <li key={e.task} onClick={() => setcount(count + percentage)} > <input type="checkbox" value={e.task} /> {e.task}</li>
+      })}
+      </ul>
+      <div className="w-[90vw]  justify-self-center overflow-hidden h-14 bg-slate-400/50 rounded-xl" >
+        <div style={{ width:`${count}%` }} className= {`duration-300 h-full bg-red-500 `} >
+        </div>
+      </div>
+    </Notewrapper>
   );
 }

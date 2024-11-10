@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import { motion } from "framer-motion";
-import { ChevronLeft, PencilSquare } from "react-bootstrap-icons";
+import { PencilSquare } from "react-bootstrap-icons";
+import Notewrapper from "./notewrapper";
+import Backbutton from "./backbutton";
 
 export default function Notedoc({
   closehandler,
@@ -9,19 +10,9 @@ export default function Notedoc({
   notedate,
 }) {
   return (
-    <motion.div
-      initial={{ scale: 0 }}
-      exit={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1 }}
-      className="w-screen h-screen flex flex-col fixed overflow-hidden z-50 top-0 bg-red-300"
-    >
-      <div className="flex justify-start bg-slate-100/10 border-black px-2 py-1 box-border border-b-2">
-        <button onClick={closehandler}>
-          {" "}
-          <ChevronLeft className="text-4xl" />
-        </button>
-      </div>
-      <div className="w-full flex items-center justify-between">
+    <Notewrapper notecolor="bg-red-300" >
+      <Backbutton closehandler={closehandler} />
+      <div className="w-full flex items-center border-b-2 border-b-black justify-between">
         {" "}
         <h1 className="font-poppins text-3xl font-bold ">
           {notetitle}
@@ -42,6 +33,6 @@ export default function Notedoc({
               <PencilSquare className="text-2xl " />
            </button>
       </div>
-    </motion.div>
+    </Notewrapper>
   );
 }
