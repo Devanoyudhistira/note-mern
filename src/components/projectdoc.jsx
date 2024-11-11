@@ -12,7 +12,7 @@ export default function Projectdoc({
   checkpoint
 }) {
   const [taskstatus,settaskstatus] = useState(checkpoint)
-  const [count,setcount] = useState(0)
+  const [count,setcount] = useState(projectpercent)
   const task = taskstatus.length
   const percentage =  100 / task
   return (

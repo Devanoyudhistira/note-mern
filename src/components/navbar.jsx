@@ -6,8 +6,11 @@ import Backdrop from "./backdrop";
 /* eslint-disable react/prop-types */
 export default function Navbar({ logout, name, image }) {
   const [isshownav, setishownav] = useState(false)
+  function turndark(){
+      document.querySelector("#html").classList.toggle("dark")
+  }
   return (
-    <nav className=" w-screen box-border h-auto relative flex items-center justify-between px-2 py-1">
+    <nav className=" w-screen box-border dark:bg-black h-auto relative flex items-center justify-between px-2 py-1">
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {isshownav &&
           <Backdrop onclose={() => setishownav(!isshownav)} >
@@ -22,12 +25,18 @@ export default function Navbar({ logout, name, image }) {
           </Backdrop>}
       </AnimatePresence>
       <h1 className="font-bebas ml-1 text-2xl tracking-wider" >hello {name} </h1>
+      <div className="flex justify-between " >
+        <label htmlFor="darktoggle" onClick={turndark}>
+          darkmode
+            <input type="checkbox" name="darktoggle" id="darktoggle" />
+        </label>
       <img
         onClick={() => setishownav(!isshownav)}
         src={image}
         alt="face-profile"
         className="rounded-full w-7 h-7 object-cover object-center"
       />
+      </div>
     </nav>
   );
 }

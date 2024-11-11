@@ -8,7 +8,7 @@ export default function Notewrapper({ notecolor, children }) {
         initial={{ scale: 0 }}
         exit={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1 }}
-        className={`w-screen h-screen fixed z-50 top-0 ${notecolor}`}>
+        className={`w-screen h-[100dvh] fixed z-50 top-0 ${notecolor}`}>
             {children}
     </motion.div>)
 }
