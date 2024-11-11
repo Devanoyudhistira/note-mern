@@ -28,7 +28,7 @@ export default function Notedoc({
       <div className="ml-1" >
         <p className="text-lg font-inter " >{notetext} </p>
       </div>
-      <div className="justify-self-end self-end absolute bottom-4 px-2 py-1 h-12 w-screen border-t-2 border-black bg-slate-500/20 flex justify-end " >
+      <div className="justify-self-end self-end absolute bottom-4 px-2 py-1 h-12 w-screen border-t-2 border-black bg-red-500 flex justify-end " >
           <button className="text-center rounded-full -mt-6 p-3 w-max h-max bg-blue-400 border-2 border-black" > 
               <PencilSquare className="text-4xl " />
            </button>

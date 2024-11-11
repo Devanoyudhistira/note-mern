@@ -15,7 +15,7 @@ import { AnimatePresence } from "framer-motion";
 import Projectdoc from "./projectdoc";
 import Noteform from "./noteform";
 
-export default function Mainpage({ image, name, logout, notedata }) {
+export default function Mainpage({ image, name, logout, notedata,setnote }) {
     const [noteopen, setnoteopen] = useState(false);
     const [projectopen, setprojectopen] = useState(false);
     const [isformopen, setformopen] = useState(false);
@@ -33,7 +33,7 @@ export default function Mainpage({ image, name, logout, notedata }) {
     return (
         <>
             <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-                {isformopen && <Noteform closehandler={() => setformopen(false)} />}
+                {isformopen && <Noteform newdata={setnote} closehandler={() => setformopen(false)} />}
                 {noteopen && (
                     <Notedoc
                         notetext={notetype.text}

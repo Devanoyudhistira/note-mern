@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="flex flex-col h-[95vh] justify-start px-2 items-center">
       {isAuthenticated ?
-        <Mainpage image={user.picture} name={user.name || user.nickname} logout={() => logout({ logoutParams: { returnTo: window.location.origin } })} notedata={notedata}   /> :
+        <Mainpage image={user.picture} setnote={setnotedata} name={user.name || user.nickname} logout={() => logout({ logoutParams: { returnTo: window.location.origin } })} notedata={notedata}   /> :
         <Loginpage loginWithRedirect={loginWithRedirect} />
       }
     </div>
