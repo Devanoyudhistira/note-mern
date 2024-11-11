@@ -29,7 +29,7 @@ export default function Projectdoc({
       <div className="text-lg font-inter" >{projecttext} </div>
       <ul>
       {checkpoint.map(e => {
-        return <li key={e.task} onClick={() => setcount(count + percentage)} > <input type="checkbox" value={e.task} /> {e.task}</li>
+        return <li key={e.task} > <input onChange={() => setcount(count + percentage)} type="checkbox" value={e.task} /> {e.task}</li>
       })}
       </ul>
       <div className="w-[90vw]  justify-self-center overflow-hidden h-14 bg-slate-400/50 rounded-xl" >
