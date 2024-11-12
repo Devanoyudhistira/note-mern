@@ -3,51 +3,48 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-export default function Noteform({ closehandler ,newdata}) {
+export default function Noteform({ closehandler, newdata,setform }) {
 
   const titleref = useRef()
   const typeref = useRef()
   const [newnote, setnewnote] = useState({
-    type: ""
+    agenda: "",
+    type: "note",
+    date_created: new Date().toISOString(),
+    description:"",
+    checkpoint:[],
+    blog:"",
+    list:[],
+    percentage:5
   })
 
   const handleSelectChange = (event) => {
     setnewnote(item => ({ ...item, type: event.target.value }))
+    if (newnote.type === "to-do-list") {
+      setnewnote(item => ({...item,list:[]}))
+      } else if (newnote.type === "note") {
+        setnewnote(item => ({...item,blog:""}))
+      } else if (newnote.type === "project") {
+        setnewnote(item => ({...item,description:"",percentage:5}))
+      }
   }
 
   const titleinput = (e) => {
-    console.log(e)
+    setnewnote(item => ({...item,agenda:e.target.value})) 
   }
 
   async function drafdata(e) {
     e.preventDefault();
-
-    const updatedNote = {
-      agenda: titleref.current.value,
-      type: typeref.current.value,
-      date_created: new Date().toISOString(),
-    };
-
-    if (newnote.type === "to-do-list") {
-      updatedNote.list = [];
-      updatedNote.description = "";
-    } else if (newnote.type === "note") {
-      updatedNote.blog = "";
-    } else if (newnote.type === "project") {
-      updatedNote.checkpoint = [];
-      updatedNote.percentage = 5;
-    }
-
-    setnewnote(updatedNote);
-
-    await fetch("https://noteapi-pink.vercel.app/postnote/note", {
+    setnewnote(item => ({...item,agenda:titleref.current.value}))
+    setTimeout(await fetch("https://noteapi-pink.vercel.app/postnote/note", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(updatedNote)
-    });
-    newdata(item => [...item,updatedNote])
+      body: JSON.stringify(newnote)
+    }), 2000)
+    newdata(item => [...item, newnote])
+    setform(false)
   }
 
 
@@ -62,7 +59,7 @@ export default function Noteform({ closehandler ,newdata}) {
             <input
               type="text"
               id="title"
-              onClick={titleinput}
+              onChange={titleinput}
               ref={titleref}
               className="peer w-full p-2 border-b-2 border-l-2 rounded-sm border-black focus:outline-none focus:border-blue-500 placeholder-transparent"
             />
