@@ -9,6 +9,7 @@ import toast , {Toaster} from "react-hot-toast";
 
 function App() {
   const [isuser, setuser] = useState(false)
+  const [hasfirstrender,sethasfirstrender] = useState(true)
   const [notedata, setnotedata] = useState();
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0()
   useEffect(() => {
@@ -25,7 +26,7 @@ function App() {
   }, [isAuthenticated]);
 
   async function loginuser() {
-    if(isAuthenticated){
+    if(isAuthenticated && hasfirstrender){
     await fetch("https://noteapi-pink.vercel.app/auth/login",
       {
         method:"POST",
@@ -37,7 +38,10 @@ function App() {
             nickname:user.name
         })
       }
-    ).then(res => res.json()).then(() =>toast.success("welcome " + user.nickname))}
+    ).then(res => res.json()).then(() =>{
+      toast.success("welcome " + user.nickname)
+      sethasfirstrender(false)
+    })}
     
   }
   loginuser()
