@@ -29,13 +29,13 @@ export default function Noteform({ closehandler, newdata, setform }) {
   async function drafdata(e) {
     e.preventDefault();
     setnewnote(item => ({ ...item, agenda: titleref.current.value }))
-   const postdata = await fetch("https://noteapi-pink.vercel.app/postnote/note", {
+    const postdata = await fetch("https://noteapi-pink.vercel.app/postnote/note", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(newnote)
-    }).then(e =>e.json()).then(result => {
+    }).then(e => e.json()).then(result => {
       console.log(result)
       newdata(item => [...item, result])
       setform(false)
@@ -55,16 +55,13 @@ export default function Noteform({ closehandler, newdata, setform }) {
       }
     );
   };
-  
-
 
   return (
-    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0, opacity: 0 }} className="flex flex-col fixed px-2 py-1 top-[10%] z-[100] bg-green-400 border-2 rounded-2xl border-black w-[85vw] h-[70vh] " >
+    <motion.div  className="flex flex-col fixed top-[10%] z-[100] bg-green-400 border-2 rounded-2xl border-black w-[85vw] h-[80vh] px-3 py-5">
       <button onClick={closehandler} > <XCircle className="text-3xl text-red-600" /> </button>
       <>
-      
         <h1 className="text-xl capitalize font-inter font-semibold self-start justify-self-start" >create note</h1>
-        <form action="">
+        <form action="" className="flex flex-col justify-center">
           <div className="relative w-full font-poppins p-2 mt-2 h-max">
             <input
               type="text"
@@ -83,7 +80,7 @@ export default function Noteform({ closehandler, newdata, setform }) {
             </label>
           </div>
 
-          <div className="w-max h-max flex items-center justify-center flex-col" >
+          <div className="w-max h-full flex items-center justify-center flex-col" >
             <label htmlFor="notetext">what your document type</label>
             <select value={newnote.type} onChange={handleSelectChange} ref={typeref} className=" font-poppins text-xl" name="notetext" id="notetext">
               <option className="font-poppins text-xl" value="note">note</option>
@@ -92,8 +89,8 @@ export default function Noteform({ closehandler, newdata, setform }) {
             </select>
           </div>
 
-          <button type="submit" onClick={handleSubmit} className="border-blue-700 text-xl mt-2 font-inter rounded-xl justify-self-end self-end font-bold border-2 px-2 py-1" > Create </button>
-          
+          <button type="submit" onClick={handleSubmit} className="border-blue-700 text-xl mt-2 font-inter rounded-xl justify-self-center self-center font-bold border-2 px-2 py-1" > Create </button>
+
         </form>
       </>
     </motion.div>

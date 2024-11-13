@@ -35,7 +35,7 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
     return (
         <>
             <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-                {isformopen && <Noteform setform={setformopen} newdata={setnote} closehandler={() => setformopen(false)} />}
+                {isformopen && <Noteform setform={setformopen} newdata={setnote} closehandler={(e) => {setformopen(false);e.stopPropagation}} />}
                 {noteopen && (
                     <Notedoc
                         notetext={notetype.text}
