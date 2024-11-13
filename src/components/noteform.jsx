@@ -57,7 +57,7 @@ export default function Noteform({ closehandler, newdata, setform }) {
   };
 
   return (
-    <motion.div  className="flex flex-col fixed top-[10%] z-[100] bg-green-400 border-2 rounded-2xl border-black w-[85vw] h-[80vh] px-3 py-5">
+    <motion.div animate={{ opacity:1,scale:1 }}  initial={{ opacity:0,scale:0 }} exit={{ opacity:0,scale:0 }}  className="flex flex-col fixed top-[10%] z-[100] bg-green-400 border-2 rounded-2xl border-black w-[85vw] h-[80vh] px-3 py-5">
       <button onClick={closehandler} > <XCircle className="text-3xl text-red-600" /> </button>
       <>
         <h1 className="text-xl capitalize font-inter font-semibold self-start justify-self-start" >create note</h1>
