@@ -5,6 +5,7 @@ import Mainpage from "./components/mainpage";
 import { useAuth0 } from "@auth0/auth0-react";
 import image from "./components/profile-user.png"
 import Loginpage from "./components/loginpage";
+import toast , {Toaster} from "react-hot-toast";
 
 function App() {
   const [isuser, setuser] = useState(false)
@@ -36,12 +37,14 @@ function App() {
             nickname:user.name
         })
       }
-    ).then(res => res.json()).then(res => res)}
+    ).then(res => res.json()).then(() =>toast.success("welcome " + user.nickname))}
+    
   }
   loginuser()
 
   return (
     <div className="flex flex-col h-[95vh] justify-start px-2 items-center">
+      <Toaster/>
       {isAuthenticated ?
         <Mainpage image={user.picture} setnote={setnotedata} name={user.name || user.nickname} logout={() => logout({ logoutParams: { returnTo: window.location.origin } })} notedata={notedata}   /> :
         <Loginpage loginWithRedirect={loginWithRedirect} />

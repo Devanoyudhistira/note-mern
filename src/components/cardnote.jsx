@@ -9,10 +9,11 @@ export default function Cardnote({
   datecreated,
   textblog,
   projectdesc,
+  objectid,
   bglight,
 }) {
   return (
-    <div className={`${bglight} overflow-hidden p-4`} >
+    <div className={`${bglight} overflow-hidden p-4`} data-id={objectid}  >
       <div
         className={`${bglight}  rounded-md shadow-[2px_2px_5px_black] border-2 gap-2 border-black w-52 h-56 justify-between flex flex-col p-2 text-center justify-self-center `}
       >

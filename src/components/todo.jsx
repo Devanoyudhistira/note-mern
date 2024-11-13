@@ -2,12 +2,12 @@
 import { useState } from "react";
 
 /* eslint-disable react/prop-types */
-export default function Todo({ list, title,clickhandler }) {
+export default function Todo({ list,objectid,title,clickhandler }) {
   const [taskdone,settaskdone] = useState(list.filter((e) => e.done).length)
   const [totaltask,settotaltask] =useState( list.length)
   const tasklist = taskdone === 0;
   return (
-    <ol onClick={clickhandler} className="text-left cursor-pointer bg-blue-300/60 mt-1 w-40 h-14 border-2 box-content border-black px-2 py-1 marker:text-red-500  overflow-hidden font-inter list-disc text-black flex flex-col justify-evenly rounded-xl font-semibold">
+    <ol data-id={objectid} onClick={clickhandler} className="text-left cursor-pointer bg-blue-300/60 mt-1 w-40 h-14 border-2 box-content border-black px-2 py-1 marker:text-red-500  overflow-hidden font-inter list-disc text-black flex flex-col justify-evenly rounded-xl font-semibold">
       <div className="w-full flex justify-self-start -mt-4 self-start items-center align-center justify-between ">
         <h1 className="truncate text-xl ">{title}</h1>
         {tasklist ? (

@@ -1,58 +1,68 @@
 import { XCircle } from "react-bootstrap-icons";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import toast from "react-hot-toast"
 
 // eslint-disable-next-line react/prop-types
-export default function Noteform({ closehandler, newdata,setform }) {
-
+export default function Noteform({ closehandler, newdata, setform }) {
   const titleref = useRef()
   const typeref = useRef()
   const [newnote, setnewnote] = useState({
     agenda: "",
     type: "note",
     date_created: new Date().toISOString(),
-    description:"",
-    checkpoint:[],
-    blog:"",
-    list:[],
-    percentage:5
+    description: "example project 1",
+    checkpoint: [{ task: "example project 1", done: false }],
+    blog: "example  note 1",
+    list: [{ task: "task 1", done: true }, { task: "task 2", done: true }, { task: "task 3", done: false }],
+    percentage: 5
   })
 
   const handleSelectChange = (event) => {
     setnewnote(item => ({ ...item, type: event.target.value }))
-    if (newnote.type === "to-do-list") {
-      setnewnote(item => ({...item,list:[]}))
-      } else if (newnote.type === "note") {
-        setnewnote(item => ({...item,blog:""}))
-      } else if (newnote.type === "project") {
-        setnewnote(item => ({...item,description:"",percentage:5}))
-      }
   }
 
   const titleinput = (e) => {
-    setnewnote(item => ({...item,agenda:e.target.value})) 
+    setnewnote(item => ({ ...item, agenda: e.target.value }))
   }
 
   async function drafdata(e) {
     e.preventDefault();
-    setnewnote(item => ({...item,agenda:titleref.current.value}))
-    setTimeout(await fetch("https://noteapi-pink.vercel.app/postnote/note", {
+    setnewnote(item => ({ ...item, agenda: titleref.current.value }))
+   const postdata = await fetch("https://noteapi-pink.vercel.app/postnote/note", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(newnote)
-    }), 2000)
-    newdata(item => [...item, newnote])
-    setform(false)
+    }).then(e =>e.json()).then(result => {
+      console.log(result)
+      newdata(item => [...item, result])
+      setform(false)
+    })
+    return postdata
   }
+  const handleSubmit = async (e) => {
+    await toast.promise(
+      drafdata(e),
+      {
+        loading: "please wait",
+        success: `${newnote.agenda} successfully created`,
+        error: "error occurred",
+      },
+      {
+        className: "p-3 text-2xl font-bebas bg-blue-300"
+      }
+    );
+  };
+  
 
 
   return (
     <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0, opacity: 0 }} className="flex flex-col fixed px-2 py-1 top-[10%] z-[100] bg-green-400 border-2 rounded-2xl border-black w-[85vw] h-[70vh] " >
       <button onClick={closehandler} > <XCircle className="text-3xl text-red-600" /> </button>
-
       <>
+      
         <h1 className="text-xl capitalize font-inter font-semibold self-start justify-self-start" >create note</h1>
         <form action="">
           <div className="relative w-full font-poppins p-2 mt-2 h-max">
@@ -82,7 +92,8 @@ export default function Noteform({ closehandler, newdata,setform }) {
             </select>
           </div>
 
-          <button type="submit" onClick={drafdata} className="border-blue-700 text-xl mt-2 font-inter rounded-xl justify-self-end self-end font-bold border-2 px-2 py-1" > Create </button>
+          <button type="submit" onClick={handleSubmit} className="border-blue-700 text-xl mt-2 font-inter rounded-xl justify-self-end self-end font-bold border-2 px-2 py-1" > Create </button>
+          
         </form>
       </>
     </motion.div>

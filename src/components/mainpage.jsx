@@ -14,6 +14,9 @@ import Notedoc from "./notedoc";
 import { AnimatePresence } from "framer-motion";
 import Projectdoc from "./projectdoc";
 import Noteform from "./noteform";
+import toast from "react-hot-toast";
+
+
 
 export default function Mainpage({ image, name, logout, notedata, setnote }) {
     const [noteopen, setnoteopen] = useState(false);
@@ -29,7 +32,6 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
     }
     const [projectdata, setprojectdata] = useState({ text: "", title: "", date: "", percentage: "", checkpoint: "" });
     const [notetype, setnotetype] = useState({ text: "", title: "", date: "" });
-
     return (
         <>
             <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>

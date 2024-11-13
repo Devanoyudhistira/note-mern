@@ -8,10 +8,12 @@ export default function Projectlist({
   title,
   percentage,
   clickhandler,
+  objectid
 }) {
   const [projectTrack, setprojecttrack] = useState(percentage === 100);
   return (
     <div
+    data-id={objectid}
       onClick={clickhandler}
       className={`w-60 ${
         projectTrack ? "border-green-500" : "border-black"

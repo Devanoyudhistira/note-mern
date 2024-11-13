@@ -15,18 +15,18 @@ export default function Sectionnote({ clickhandler,notedata, type, icon }) {
           if (type === "project") {
             return (
               e.description !== undefined && e.type === type && (
-                <Projectlist clickhandler={() => clickhandler(e.description,e.agenda,e["date_created"],e.percentage,e.checkpoint)} projectdesc={e.description} percentage={e.percentage} title={e.agenda} />
+                <Projectlist clickhandler={() => clickhandler(e.description,e.agenda,e["date_created"],e.percentage,e.checkpoint)} objectid={e["_id"]} projectdesc={e.description} percentage={e.percentage} title={e.agenda} />
               )
             );
           } else if (type === "note") {
             return (
               e.blog !== undefined && e.type === type && (
-                <Note textblog={e.blog} clickhandler={() => clickhandler(e.blog,e.agenda,e["date_created"])} title={e.agenda} />
+                <Note objectid={e["_id"]} textblog={e.blog}  clickhandler={() => clickhandler(e.blog,e.agenda,e["date_created"])} title={e.agenda} />
               )
             );
           } else if (type === "to-do-list") {
             return (
-              e.list !== undefined && e.type === type && <Todo clickhandler={clickhandler} list={e.list} title={e.agenda} />
+              e.list !== undefined && e.type === type && <Todo objectid={e["_id"]} clickhandler={clickhandler} list={e.list} title={e.agenda} />
             );
           }
         })}
