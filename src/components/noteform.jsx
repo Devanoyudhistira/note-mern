@@ -32,7 +32,6 @@ export default function Noteform({ closehandler, newdata, setform }) {
     setnewnote(item => ({ ...item, agenda: titleref.current.value }))
     const postdata = await fetch("https://noteapi-pink.vercel.app/postnote/note", {
       method: "POST",
-      credentials:"include",
       headers: {
         "Content-Type": "application/json"
       },
