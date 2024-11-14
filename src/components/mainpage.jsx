@@ -35,7 +35,7 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
     return (
         <>
             <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-                {isformopen && <Noteform setform={setformopen} newdata={setnote} closehandler={(e) => {setformopen(false);e.stopPropagation}} />}
+                {isformopen && <Noteform setform={setformopen} newdata={setnote} closehandler={(e) => { setformopen(false); e.stopPropagation }} />}
                 {noteopen && (
                     <Notedoc
                         notetext={notetype.text}
@@ -65,18 +65,24 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
             <Mainnote data={notedata} identity={name} >
 
                 <Sectionnote
+                    setnote={setnote}
+                    closehandler={() => setnoteopen(false)}
                     clickhandler={() => console.log("note")}
                     notedata={notedata}
                     icon={<Star className="inline-block" fill="gold" color="gold" />}
                     type={"to-do-list"}
                 />
                 <Sectionnote
-                    clickhandler={projectdocopen}
+                    setnote={setnote}
+                    closehandler={setprojectopen}
+                clickhandler={projectdocopen}
                     notedata={notedata}
                     type={"project"}
                     icon={<Pencil className="inline-block" />}
                 />
                 <Sectionnote
+                    closehandler={setnoteopen}
+                    setnote={setnote}
                     clickhandler={notedocopen}
                     notedata={notedata}
                     type={"note"}
@@ -84,7 +90,7 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
                 />
             </Mainnote>
             <Footer>
-                <Addbutton openedit={() => setformopen(true)} />
+                <Addbutton openedit={setformopen} />
             </Footer>
         </>
     )

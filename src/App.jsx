@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Mainpage from "./components/mainpage";
 import { useAuth0 } from "@auth0/auth0-react";
-import image from "./components/profile-user.png"
 import Loginpage from "./components/loginpage";
 import toast , {Toaster} from "react-hot-toast";
 
