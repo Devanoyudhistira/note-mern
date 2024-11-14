@@ -5,6 +5,7 @@ import toast from "react-hot-toast"
 
 // eslint-disable-next-line react/prop-types
 export default function Noteform({ closehandler, newdata, setform }) {
+  const id = sessionStorage.getItem("id")
   const titleref = useRef()
   const typeref = useRef()
   const [newnote, setnewnote] = useState({
@@ -15,9 +16,9 @@ export default function Noteform({ closehandler, newdata, setform }) {
     checkpoint: [{ task: "example project 1", done: false }],
     blog: "example  note 1",
     list: [{ task: "task 1", done: true }, { task: "task 2", done: true }, { task: "task 3", done: false }],
-    percentage: 5
+    percentage: 5,
+    sender:id
   })
-
   const handleSelectChange = (event) => {
     setnewnote(item => ({ ...item, type: event.target.value }))
   }
@@ -31,6 +32,7 @@ export default function Noteform({ closehandler, newdata, setform }) {
     setnewnote(item => ({ ...item, agenda: titleref.current.value }))
     const postdata = await fetch("https://noteapi-pink.vercel.app/postnote/note", {
       method: "POST",
+      credentials:"include",
       headers: {
         "Content-Type": "application/json"
       },
