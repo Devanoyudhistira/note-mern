@@ -2,12 +2,12 @@ import { XCircle } from "react-bootstrap-icons";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast"
+import Typeradio from "./typeradio";
 
 // eslint-disable-next-line react/prop-types
 export default function Noteform({ closehandler, newdata, setform }) {
   const id = sessionStorage.getItem("id")
   const titleref = useRef()
-  const typeref = useRef()
   const [newnote, setnewnote] = useState({
     agenda: "",
     type: "note",
@@ -17,11 +17,8 @@ export default function Noteform({ closehandler, newdata, setform }) {
     blog: "example  note 1",
     list: [{ task: "task 1", done: true }, { task: "task 2", done: true }, { task: "task 3", done: false }],
     percentage: 5,
-    sender:id
+    sender: id
   })
-  const handleSelectChange = (event) => {
-    setnewnote(item => ({ ...item, type: event.target.value }))
-  }
 
   const titleinput = (e) => {
     setnewnote(item => ({ ...item, agenda: e.target.value }))
@@ -58,7 +55,7 @@ export default function Noteform({ closehandler, newdata, setform }) {
   };
 
   return (
-    <motion.div animate={{ opacity:1,scale:1 }}  initial={{ opacity:0,scale:0 }} exit={{ opacity:0,scale:0 }}  className="flex flex-col fixed top-[10%] z-[100] bg-green-400 border-2 rounded-2xl border-black w-[85vw] h-[80vh] px-3 py-5">
+    <motion.div animate={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0 }} exit={{ opacity: 0, scale: 0 }} className="flex flex-col fixed top-[10%] z-[100] bg-white border-2 rounded-2xl border-green-400 w-[85vw] h-[80vh] px-3 py-5">
       <button onClick={closehandler} > <XCircle className="text-3xl text-red-600" /> </button>
       <>
         <h1 className="text-xl capitalize font-inter font-semibold self-start justify-self-start" >create note</h1>
@@ -73,9 +70,7 @@ export default function Noteform({ closehandler, newdata, setform }) {
             />
             <label
               htmlFor="title"
-              className="absolute left-5 top-3 font-inter text-lg text-black transition-all duration-200 ease-in-out 
-               peer-placeholder-shown:top-3 peer-placeholder-shown:text-lg 
-               peer-focus:-top-3 peer-focus:text-base peer-focus:text-blue-500"
+              className={`absolute ${newnote.agenda.length === 0 ? "left-5 top-3" : "-top-3"}  font-inter text-lg text-black transition-all duration-200 ease-in-out left-3 peer-focus:-top-3 peer-focus:text-base peer-focus:text-blue-500`}
             >
               Title
             </label>
@@ -83,11 +78,11 @@ export default function Noteform({ closehandler, newdata, setform }) {
 
           <div className="w-max h-full flex items-center justify-center flex-col" >
             <label htmlFor="notetext">what your document type</label>
-            <select value={newnote.type} onChange={handleSelectChange} ref={typeref} className=" font-poppins text-xl" name="notetext" id="notetext">
-              <option className="font-poppins text-xl" value="note">note</option>
-              <option className="font-poppins text-xl" value="to-do-list"> to-do-list </option>
-              <option className="font-poppins text-xl" value="project">project</option>
-            </select>
+            <div className="w-full justify-center items-center flex flex-col gap-3" >
+              <Typeradio onchange={(e) => setnewnote(item => ({ ...item, type: e.target.value }))} identityvalue="project" />
+              <Typeradio onchange={(e) => setnewnote(item => ({ ...item, type: e.target.value }))} identityvalue="to-do-list" />
+              <Typeradio onchange={(e) => setnewnote(item => ({ ...item, type: e.target.value }))} identityvalue="note" />
+            </div>
           </div>
 
           <button type="submit" onClick={handleSubmit} className="border-blue-700 text-xl mt-2 font-inter rounded-xl justify-self-center self-center font-bold border-2 px-2 py-1" > Create </button>
