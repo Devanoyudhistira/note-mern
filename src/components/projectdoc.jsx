@@ -32,7 +32,7 @@ export default function Projectdoc({
         return <li key={e.task} > <input onChange={() => setcount(count + percentage)} type="checkbox" value={e.task} /> {e.task}</li>
       })}
       </ul>
-      <div className="w-[90vw]  justify-self-center overflow-hidden h-14 bg-slate-400/50 rounded-xl" >
+      <div className="w-[90vw] ml-6  overflow-hidden h-14 bg-slate-400/50 rounded-xl" >
         <div style={{ width:`${count}%` }} className= {`duration-300 h-full bg-red-500 `} >
         </div>
       </div>
