@@ -1,6 +1,7 @@
 import { XCircle } from "react-bootstrap-icons";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+
 import toast from "react-hot-toast"
 import Typeradio from "./typeradio";
 
@@ -8,15 +9,16 @@ import Typeradio from "./typeradio";
 export default function Noteform({ closehandler, newdata, setform }) {
   const id = sessionStorage.getItem("id")
   const titleref = useRef()
+  const [isdisable,setisdisable] = useState(false)
   const [newnote, setnewnote] = useState({
     agenda: "",
     type: "note",
-    date_created: new Date().toISOString(),
-    description: "example project 1",
-    checkpoint: [{ task: "example project 1", done: false }],
-    blog: "example  note 1",
-    list: [{ task: "task 1", done: true }, { task: "task 2", done: true }, { task: "task 3", done: false }],
-    percentage: 5,
+    date_created: new Date().toLocaleString("id-ID",{dateStyle:"full"}),
+    description: "",
+    checkpoint: [],
+    blog: "",
+    list: [],
+    percentage: 0,
     sender: id
   })
 
@@ -41,6 +43,7 @@ export default function Noteform({ closehandler, newdata, setform }) {
     return postdata
   }
   const handleSubmit = async (e) => {
+    setisdisable(true)
     await toast.promise(
       drafdata(e),
       {
@@ -85,7 +88,7 @@ export default function Noteform({ closehandler, newdata, setform }) {
             </div>
           </div>
 
-          <button type="submit" onClick={handleSubmit} className="border-blue-700 text-xl mt-2 font-inter rounded-xl justify-self-center self-center font-bold border-2 px-2 py-1" > Create </button>
+          <button type="submit" onClick={handleSubmit} disabled={isdisable} className="border-black shadow-[3px_3px_0_black] disabled:bg-white text-xl mt-2 font-poppins tracking-wider bg-blue-500 rounded-xl justify-self-center self-center font-bold border-2 px-3 py-1" > {isdisable ? "Loading" : "Create"} </button>
 
         </form>
       </>
