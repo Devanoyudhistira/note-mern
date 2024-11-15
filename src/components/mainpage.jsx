@@ -22,16 +22,16 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
     const [noteopen, setnoteopen] = useState(false);
     const [projectopen, setprojectopen] = useState(false);
     const [isformopen, setformopen] = useState(false);
-    function notedocopen(text, title, date) {
+    function notedocopen(text, title, date,id) {
         setnoteopen(true);
-        setnotetype({ text: text, title: title, date: date });
+        setnotetype({ text: text, title: title, date: date,target:id });
     }
     function projectdocopen(text, title, date, percentage, checkpoint) {
         setprojectopen(true);
         setprojectdata({ text: text, title: title, date: date, checkpoint: checkpoint, percentage: percentage });
     }
     const [projectdata, setprojectdata] = useState({ text: "", title: "", date: "", percentage: "", checkpoint: "" });
-    const [notetype, setnotetype] = useState({ text: "", title: "", date: "" });
+    const [notetype, setnotetype] = useState({ text: "", title: "", date: "",target:1 });
     return (
         <>
             <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
@@ -42,6 +42,7 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
                         notetitle={notetype.title}
                         notedate={notetype.date}
                         closehandler={() => setnoteopen(false)}
+                        target={notetype.target}
                     />
                 )}
                 {projectopen && (

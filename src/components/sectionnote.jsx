@@ -21,7 +21,8 @@ export default function Sectionnote({ clickhandler,notedata, type, icon ,setnote
           } else if (type === "note") {
             return (
               e.blog !== undefined && e.type === type && (
-                <Note objectid={e["_id"]} closehandler={closehandler} setnotedata={setnote} textblog={e.blog} notedata={notedata} clickhandler={() => clickhandler(e.blog,e.agenda,e["date_created"])} title={e.agenda} />
+                <Note objectid={e["_id"]} closehandler={closehandler} setnotedata={setnote} textblog={e.blog} notedata={notedata} 
+                clickhandler={() => clickhandler(e.blog,e.agenda,e["date_created"],e["_id"])} title={e.agenda} />
               )
             );
           } else if (type === "to-do-list") {

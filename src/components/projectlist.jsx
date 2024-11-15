@@ -20,7 +20,7 @@ export default function Projectlist({
       onClick={clickhandler}
       className={`w-60 ${
         projectTrack ? "border-green-500" : "border-black"
-      } border-2 box-content cursor-pointer rounded-xl flex flex-col px-3 py-1 bg-orange-200/50 text-left overflow-hidden  h-18 text-black`}
+      } border-2 box-content cursor-pointer rounded-xl flex flex-col px-3 py-1 shadow-[2px_2px_0_black] bg-orange-600 text-left overflow-hidden  h-18 text-black`}
     >
       <Deletenote target={objectid} setfulldata={setnotedata} closehandler={closehandler} />
       <div className="w-full flex justify-between">
