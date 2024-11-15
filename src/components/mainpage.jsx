@@ -43,6 +43,7 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
                         notedate={notetype.date}
                         closehandler={() => setnoteopen(false)}
                         target={notetype.target}
+                        setnote={setnote}
                     />
                 )}
                 {projectopen && (

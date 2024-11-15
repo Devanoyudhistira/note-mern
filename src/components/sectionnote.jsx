@@ -22,7 +22,7 @@ export default function Sectionnote({ clickhandler,notedata, type, icon ,setnote
             return (
               e.blog !== undefined && e.type === type && (
                 <Note objectid={e["_id"]} closehandler={closehandler} setnotedata={setnote} textblog={e.blog} notedata={notedata} 
-                clickhandler={() => clickhandler(e.blog,e.agenda,e["date_created"],e["_id"])} title={e.agenda} />
+                clickhandler={() => clickhandler(e.blog,e.agenda,e["date_created"],e["_id"],setnote)} title={e.agenda} />
               )
             );
           } else if (type === "to-do-list") {
