@@ -66,11 +66,11 @@ export default function Notedoc({
           {notedate}  {" "}
         </p>
       </div>
-     {!editmode && <div className="ml-1 w-[98vw] text-start px-1" >
+     {!editmode && <div className="ml-1 w-screen text-start px-1 break-words" >
         <span className="text-lg font-inter text-start" >{newdata.newnote} </span>
       </div>}
       {editmode && <div>
-        <textarea autoFocus value={newdata.newnote} ref={noteedit} className="w-[97%] ml-2 h-[80vh] justify-self-center resize-none border-none outline-none" onChange={(e) => setnewdata(item => ({ ...item, newnote: e.target.value }))} name="text-edit" id="text-edit"></textarea>
+        <textarea autoFocus value={newdata.newnote} ref={noteedit} className="w-[97%] ml-2 h-[80vh] justify-self-center resize-none border-none bg-black/0 outline-none" onChange={(e) => setnewdata(item => ({ ...item, newnote: e.target.value }))} name="text-edit" id="text-edit"></textarea>
       </div>}
       <div className="justify-self-end self-end absolute bottom-0 px-2 py-1 mt-3 h-max w-screen border-t-2 border-black bg-red-500 flex justify-end " >
         {!editmode && <button onClick={editmodeactive} className="text-center rounded-full -mt-6 p-3 w-max h-max bg-blue-400 border-2 border-black" >
