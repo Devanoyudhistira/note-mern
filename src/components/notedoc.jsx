@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { PencilSquare } from "react-bootstrap-icons";
+import { Check, PencilSquare } from "react-bootstrap-icons";
 import Notewrapper from "./notewrapper";
 import Backbutton from "./backbutton";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Notedoc({
   closehandler,
@@ -19,8 +19,28 @@ export default function Notedoc({
     target: target
   })
 
+  const noteedit = useRef()
+
+  const [editmode, seteditmode] = useState(false)
+
+  function editmodeactive(){
+    seteditmode(true)
+    noteedit.current.focus
+  }
 
   async function updatenote() {
+    seteditmode(false)
+    setnote(prevNotes => {
+      if (Array.isArray(prevNotes)) {
+        return prevNotes.map(note => {
+          if (note && note._id) {
+            return note._id === target
+              ? { ...note, blog: newdata.newnote, agenda: newdata.newtitle }
+              : note;
+          }
+        });
+      }
+    })
     await fetch("https://noteapi-pink.vercel.app/updatenote/", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -28,17 +48,7 @@ export default function Notedoc({
     }).then(res => {
       return res.json()
     }).then(res => {
-      setnewdata(res.data)
-      setnote(prevNotes => {
-        if (Array.isArray(prevNotes)) {
-            return prevNotes.map(note => {
-                if (note && note._id) {
-                    return note._id === target 
-                        ? { ...note, blog:newdata.newnote,agenda:newdata.newtitle } 
-                        : note;
-                } 
-            });
-    }})})
+      setnewdata(res.data)})
   }
   return (
     <Notewrapper notecolor="bg-red-300" >
@@ -56,17 +66,19 @@ export default function Notedoc({
           {notedate}  {" "}
         </p>
       </div>
-      <div className="ml-1" >
-        <p className="text-lg font-inter " >{newdata.newnote} </p>
-      </div>
-      <div>
-        <textarea onChange={(e) => setnewdata(item => ({ ...item, newnote: e.target.value }))} name="text-edit" id="text-edit"></textarea>
-        <button onClick={updatenote} >kumpulkan</button>
-      </div>
+     {!editmode && <div className="ml-1 w-[98vw] text-start px-1" >
+        <span className="text-lg font-inter text-start" >{newdata.newnote} </span>
+      </div>}
+      {editmode && <div>
+        <textarea autoFocus value={newdata.newnote} ref={noteedit} className="w-[97%] ml-2 h-[80vh] justify-self-center resize-none border-none outline-none" onChange={(e) => setnewdata(item => ({ ...item, newnote: e.target.value }))} name="text-edit" id="text-edit"></textarea>
+      </div>}
       <div className="justify-self-end self-end absolute bottom-0 px-2 py-1 mt-3 h-max w-screen border-t-2 border-black bg-red-500 flex justify-end " >
-        <button className="text-center rounded-full -mt-6 p-3 w-max h-max bg-blue-400 border-2 border-black" >
+        {!editmode && <button onClick={editmodeactive} className="text-center rounded-full -mt-6 p-3 w-max h-max bg-blue-400 border-2 border-black" >
           <PencilSquare className="text-4xl " />
-        </button>
+        </button>}
+        {editmode && <button onClick={updatenote} className="text-center rounded-full -mt-6 p-3 w-max h-max bg-blue-400 border-2 border-black" >
+          <Check className="text-4xl" />
+        </button>}
       </div>
     </Notewrapper>
   );
