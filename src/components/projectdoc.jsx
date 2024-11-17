@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+ 
 import { ChevronLeft } from "react-bootstrap-icons";
 import Notewrapper from "./notewrapper";
 import { useState } from "react";
@@ -48,6 +49,7 @@ export default function Projectdoc({
   }
 
   function editproject() {
+    
     setnote(prevNotes => {
       if (Array.isArray(prevNotes)) {
         return prevNotes.map(project => {
@@ -62,7 +64,8 @@ export default function Projectdoc({
               : project;
           }
         });
-      }})
+      }
+    })
     setnewdata(item => ({
       ...item,
       checkpoint: [
@@ -82,6 +85,7 @@ export default function Projectdoc({
   const task = newdata.checkpoint.length
   const percentage = 100 / task
   const totalpercent = Math.ceil(newdata.percentage >= 100 ? 100 : newdata.percentage)
+  console.log(totalpercent >= 100)
   return (
     <Notewrapper
       notecolor="bg-orange-300"
@@ -94,16 +98,24 @@ export default function Projectdoc({
         <p className="text-lg font-poppins font-light" > {projectdate} </p>
       </div>
       <div className="text-lg font-inter" >{projecttext} </div>
-      <ul>
+      <ul className="" >
         {newdata.checkpoint.map((e, i) => {
-          return <li key={e.task} > <input onChange={() => updatenote(i)} disabled={e.done} type="checkbox" value={e.task} />{e.task}</li>
+          return (
+            <li key={e.task} className="mt-2" >
+              <label htmlFor={e.task} className={` ml-8 inline-block duration-300 w-[92%] border-4 shadow-[3px_3px_10px_black] ${e.done ? "border-green-500" : "border-red-600"} px-3 py-1`} >
+               <span className={`text-xl ${e.done ? "text-green-500" : "text-red-600"} font-inter font-semibold`} > {e.task} </span>
+                <input onChange={() => updatenote(i)} id={e.task} disabled={e.done} type="checkbox" value={e.task} />
+              </label>
+            </li>)
         })}
       </ul>
-      <div className="w-[90vw] ml-6  overflow-hidden h-14 bg-slate-400/50 rounded-xl" >
-        <div style={{ width: `${newdata.percentage}%` }} className={`duration-300 h-full bg-red-500 `}>
+      <div className="w-[90vw] mt-3 ml-6  overflow-hidden h-14 bg-slate-400/50 rounded-xl" >
+        <div style={{ width: `${newdata.percentage}%` }} className={`duration-300 h-full ${totalpercent < 100 ? "bg-red-500" : "bg-green-500"} `}>
         </div>
       </div>
-      <Editfooter editmode={editmode} editmodeactive={editmodeactive} updatenote={editproject} />
+      {
+      totalpercent < 100 && <Editfooter editmode={editmode} editmodeactive={editmodeactive} updatenote={editproject} />
+      }
     </Notewrapper>
   );
 }

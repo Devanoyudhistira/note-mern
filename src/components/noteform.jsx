@@ -15,7 +15,7 @@ export default function Noteform({ closehandler, newdata, setform }) {
     type: "note",
     date_created: new Date().toLocaleString("id-ID",{dateStyle:"full"}),
     description: "",
-    checkpoint: [{ task: "task 1", done: false }, { task: "task 2", done: false }, { task: "task 3", done: false }, { task: "task 4", done: false }, { task: "task 7", done: false }, { task: "task 6", done: false },{task:"task 5",done:false}],
+    checkpoint: [],
     blog: "",
     list: [],
     percentage: 0,
@@ -58,13 +58,14 @@ export default function Noteform({ closehandler, newdata, setform }) {
   };
 
   return (
-    <motion.div animate={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0 }} exit={{ opacity: 0, scale: 0 }} className="flex flex-col fixed top-[10%] z-[100] bg-white border-2 rounded-2xl border-green-400 w-[85vw] h-[80vh] px-3 py-5">
+    <motion.div animate={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0 }} exit={{ opacity: 0, scale: 0 }} className="flex flex-col fixed top-[10%] z-[100] bg-white border-4 shadow-[6px_6px_0_black] rounded-2xl border-black w-[85vw] h-[80vh] px-3 py-5">
       <button onClick={closehandler} > <XCircle className="text-3xl text-red-600" /> </button>
       <>
         <h1 className="text-xl capitalize font-inter font-semibold self-start justify-self-start" >create note</h1>
         <form action="" className="flex flex-col justify-center">
           <div className="relative w-full font-poppins p-2 mt-2 h-max">
             <input
+              autoFocus
               type="text"
               id="title"
               onChange={titleinput}
