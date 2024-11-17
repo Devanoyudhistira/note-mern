@@ -13,7 +13,7 @@ export default function Projectlist({
   closehandler,
   setnotedata
 }) {
-  const [projectTrack, setprojecttrack] = useState(percentage === 100);
+  const [projectTrack, setprojecttrack] = useState();
   return (
     <div 
     data-id={objectid}
@@ -27,10 +27,10 @@ export default function Projectlist({
         <h1 className=" text-xl font-bold font-inter truncate"> {title} </h1>
         <h3 className=" text-lg font-bold font-inter ">
           {" "}
-          {projectTrack ? (
+          {percentage >= 100 ? (
             <Check className="inline-block text-green-500" />
           ) : (
-            `${percentage}%`
+            `${Math.ceil(percentage >= 100 ? 100 : percentage )}%`
           )}{" "}
         </h3>
       </div>

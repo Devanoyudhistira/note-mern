@@ -15,7 +15,7 @@ export default function Sectionnote({ clickhandler,notedata, type, icon ,setnote
           if (type === "project") {
             return (
               e.description !== undefined && e.type === type && (
-                <Projectlist closehandler={closehandler} setnotedata={setnote} clickhandler={() => clickhandler(e.description,e.agenda,e["date_created"],e.percentage,e.checkpoint)} objectid={e["_id"]} projectdesc={e.description} percentage={e.percentage} title={e.agenda} />
+                <Projectlist closehandler={closehandler} setnotedata={setnote} clickhandler={() => clickhandler(e.description,e.agenda,e["date_created"],e.percentage,e.checkpoint,e["_id"])} objectid={e["_id"]} projectdesc={e.description} percentage={e.percentage} title={e.agenda} />
               )
             );
           } else if (type === "note") {

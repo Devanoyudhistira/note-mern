@@ -15,7 +15,7 @@ export default function Noteform({ closehandler, newdata, setform }) {
     type: "note",
     date_created: new Date().toLocaleString("id-ID",{dateStyle:"full"}),
     description: "",
-    checkpoint: [],
+    checkpoint: [{ task: "task 1", done: false }, { task: "task 2", done: false }, { task: "task 3", done: false }, { task: "task 4", done: false }, { task: "task 7", done: false }, { task: "task 6", done: false },{task:"task 5",done:false}],
     blog: "",
     list: [],
     percentage: 0,

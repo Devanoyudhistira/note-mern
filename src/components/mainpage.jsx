@@ -15,22 +15,24 @@ import { AnimatePresence } from "framer-motion";
 import Projectdoc from "./projectdoc";
 import Noteform from "./noteform";
 import toast from "react-hot-toast";
+import Tododoc from "./tododoc";
 
 
 
 export default function Mainpage({ image, name, logout, notedata, setnote }) {
     const [noteopen, setnoteopen] = useState(false);
     const [projectopen, setprojectopen] = useState(false);
+    const [todoopen, settodoopen] = useState(false);
     const [isformopen, setformopen] = useState(false);
     function notedocopen(text, title, date,id) {
         setnoteopen(true);
         setnotetype({ text: text, title: title, date: date,target:id });
     }
-    function projectdocopen(text, title, date, percentage, checkpoint) {
+    function projectdocopen(text, title, date, percentage, checkpoint,id) {
         setprojectopen(true);
-        setprojectdata({ text: text, title: title, date: date, checkpoint: checkpoint, percentage: percentage });
+        setprojectdata({ text: text, title: title, date: date, checkpoint: checkpoint, percentage: percentage,target:id });
     }
-    const [projectdata, setprojectdata] = useState({ text: "", title: "", date: "", percentage: "", checkpoint: "" });
+    const [projectdata, setprojectdata] = useState({ text: "", title: "", date: "", percentage: "", checkpoint: "" ,target:1});
     const [notetype, setnotetype] = useState({ text: "", title: "", date: "",target:1 });
     return (
         <>
@@ -54,22 +56,23 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
                         projectpercent={projectdata.percentage}
                         checkpoint={projectdata.checkpoint}
                         closehandler={() => setprojectopen(false)}
+                        target={projectdata.target}
+                        setnote={setnote}
                     />
                 )}
+                {
+                    todoopen && (
+                        <Tododoc/>
+                    )
+                }
             </AnimatePresence>
             <Navbar logout={logout} image={image} name={name} />
-            <Input
-                identity="searchnote"
-                labeltext="search"
-                inputType="search"
-                style="py-2 bg-white outline-none border-2 border-black rounded-2xl px-1 text-xl w-full h-full"
-            />
             <Mainnote data={notedata} identity={name} >
 
                 <Sectionnote
                     setnote={setnote}
                     closehandler={() => setnoteopen(false)}
-                    clickhandler={() => console.log("note")}
+                    clickhandler={() => settodoopen(true)}
                     notedata={notedata}
                     icon={<Star className="inline-block" fill="gold" color="gold" />}
                     type={"to-do-list"}
