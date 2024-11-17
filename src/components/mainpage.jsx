@@ -24,16 +24,26 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
     const [projectopen, setprojectopen] = useState(false);
     const [todoopen, settodoopen] = useState(false);
     const [isformopen, setformopen] = useState(false);
-    function notedocopen(text, title, date,id) {
+    function notedocopen(text, title, date, id) {
         setnoteopen(true);
-        setnotetype({ text: text, title: title, date: date,target:id });
+        setnotetype({ text: text, title: title, date: date, target: id });
     }
-    function projectdocopen(text, title, date, percentage, checkpoint,id) {
+    function projectdocopen(text, title, date, percentage, checkpoint, id) {
         setprojectopen(true);
-        setprojectdata({ text: text, title: title, date: date, checkpoint: checkpoint, percentage: percentage,target:id });
+        setprojectdata({ text: text, title: title, date: date, checkpoint: checkpoint, percentage: percentage, target: id });
     }
-    const [projectdata, setprojectdata] = useState({ text: "", title: "", date: "", percentage: "", checkpoint: "" ,target:1});
-    const [notetype, setnotetype] = useState({ text: "", title: "", date: "",target:1 });
+    async function projectput(newdata) {
+        setprojectopen(false)
+        await fetch("https://noteapi-pink.vercel.app/updateproject/", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newdata)
+        }).then(res => {
+            return res.json()
+        })
+    }
+    const [projectdata, setprojectdata] = useState({ text: "", title: "", date: "", percentage: "", checkpoint: "", target: 1 });
+    const [notetype, setnotetype] = useState({ text: "", title: "", date: "", target: 1 });
     return (
         <>
             <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
@@ -55,14 +65,14 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
                         projectdate={projectdata.date}
                         projectpercent={projectdata.percentage}
                         checkpoint={projectdata.checkpoint}
-                        closehandler={() => setprojectopen(false)}
+                        closehandler={projectput}
                         target={projectdata.target}
                         setnote={setnote}
                     />
                 )}
                 {
                     todoopen && (
-                        <Tododoc/>
+                        <Tododoc />
                     )
                 }
             </AnimatePresence>
@@ -80,7 +90,7 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
                 <Sectionnote
                     setnote={setnote}
                     closehandler={setprojectopen}
-                clickhandler={projectdocopen}
+                    clickhandler={projectdocopen}
                     notedata={notedata}
                     type={"project"}
                     icon={<Pencil className="inline-block" />}
