@@ -27,7 +27,9 @@ export default function Sectionnote({ clickhandler,notedata, type, icon ,setnote
             );
           } else if (type === "to-do-list") {
             return (
-              e.list !== undefined && e.type === type && <Todo closehandler={closehandler} setnotedata={setnote} objectid={e["_id"]} clickhandler={clickhandler} list={e.list} title={e.agenda} />
+              e.list !== undefined && e.type === type && 
+              <Todo closehandler={closehandler} setnotedata={setnote} objectid={e["_id"]}
+               clickhandler={() => clickhandler(e.agenda,e["date_created"],e.list,e["_id"]) } list={e.list} title={e.agenda} />
             );
           }
         })}

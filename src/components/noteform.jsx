@@ -17,7 +17,12 @@ export default function Noteform({ closehandler, newdata, setform }) {
     description: "",
     checkpoint: [],
     blog: "",
-    list: [],
+    list: [
+      {task:"task 2",done:false},
+      {task:"task 3",done:false},
+      {task:"task 4",done:false},
+      {task:"task 5",done:false},
+    ],
     percentage: 0,
     sender: id
   })
