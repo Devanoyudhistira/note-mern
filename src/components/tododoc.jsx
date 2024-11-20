@@ -11,7 +11,7 @@ export default function Tododoc({
   const percentage =  100
   return (
     <Notewrapper
-    notecolor="bg-orange-300"
+    notecolor="bg-blue-500"
     >
       <Backbutton closehandler={closehandler} />
       <div className="w-full mb-2 border-b-black border-b-2 grid grid-cols-2 items-center content-between justify-between" >

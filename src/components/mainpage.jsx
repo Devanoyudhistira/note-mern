@@ -16,6 +16,7 @@ import Projectdoc from "./projectdoc";
 import Noteform from "./noteform";
 import toast from "react-hot-toast";
 import Tododoc from "./tododoc";
+import Backdrop from "./backdrop";
 
 
 
@@ -47,7 +48,11 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
     return (
         <>
             <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-                {isformopen && <Noteform setform={setformopen} newdata={setnote} closehandler={(e) => { setformopen(false); e.stopPropagation }} />}
+                {isformopen &&
+                    <Backdrop onclose={() => setformopen(false)}>
+                        <Noteform setform={setformopen} newdata={setnote} closehandler={(e) => { setformopen(false); e.stopPropagation }}
+                        />
+                    </Backdrop>}
                 {noteopen && (
                     <Notedoc
                         notetext={notetype.text}

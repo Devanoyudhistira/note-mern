@@ -10,7 +10,7 @@ export default function Navbar({ logout, name, image }) {
       document.querySelector("#html").classList.toggle("dark")
   }
   return (
-    <nav className=" w-screen box-border dark:bg-black h-auto relative flex items-center justify-between px-2 py-1">
+    <nav className=" w-screen box-border border-b-2 border-black  dark:bg-black h-auto relative flex items-center justify-between px-2 py-1">
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {isshownav &&
           <Backdrop onclose={() => setishownav(!isshownav)} >

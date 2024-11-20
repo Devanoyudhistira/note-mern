@@ -19,7 +19,6 @@ export default function Projectdoc({
   setnote
 }) {
   const newcheckpointref = useRef()
-  const [editconfirm, seteditconfirm] = useState(false)
   const [showconfirmedit, setshowconfirmedit] = useState(false)
 
   const [newdata, setnewdata] = useState({
@@ -169,7 +168,7 @@ export default function Projectdoc({
           <form className="flex justify-center  flex-col" >
             <label className="flex justify-centers" htmlFor="newcheckpoint">
               <h1 className="text-xl font-inter text-red-500 font-bold " >new checkpoint</h1>
-              <input type="text" className="py-1 ml-1 outline-none rounded-md border-2 border-black" ref={newcheckpointref} name="newcheckpoint" id="newcheckpoint" />
+              <input type="text" autoFocus className="py-1 ml-1 outline-none rounded-md border-2 border-black" ref={newcheckpointref} name="newcheckpoint" id="newcheckpoint" />
               <button className="w-max bg-slate-100 ml-2 text-3xl py-1 px-1 shadow-[1px_1px_0_black]" onClick={(e) => {e.preventDefault();editproject(newcheckpointref.current.value)}} > <Plus /> </button>
             </label>
           </form>}

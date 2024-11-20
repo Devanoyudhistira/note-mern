@@ -58,11 +58,11 @@ export default function Noteform({ closehandler, newdata, setform }) {
   };
 
   return (
-    <motion.div animate={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0 }} exit={{ opacity: 0, scale: 0 }} className="flex flex-col fixed top-[10%] z-[100] bg-white border-4 shadow-[6px_6px_0_black] rounded-2xl border-black w-[85vw] h-[80vh] px-3 py-5">
+    <motion.div animate={{ opacity: 1, scale: 1 }} onClick={e => e.stopPropagation()} initial={{ opacity: 0, scale: 0 }} exit={{ opacity: 0, scale: 0 }} className="flex flex-col fixed top-[10%] z-[100] bg-white border-4 shadow-[6px_6px_0_black] rounded-2xl border-black w-[85vw] h-[80vh] px-3 py-5">
       <button onClick={closehandler} > <XCircle className="text-3xl text-red-600" /> </button>
       <>
-        <h1 className="text-xl capitalize font-inter font-semibold self-start justify-self-start" >create note</h1>
-        <form action="" className="flex flex-col justify-center">
+        <h1 onClick={e => e.stopPropagation()} className="text-xl capitalize font-inter font-semibold self-start justify-self-start" >create note</h1>
+        <form onClick={e => e.stopPropagation()} className="flex flex-col justify-center">
           <div className="relative w-full font-poppins p-2 mt-2 h-max">
             <input
               autoFocus
