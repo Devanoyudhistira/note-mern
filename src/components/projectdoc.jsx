@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import { ChevronLeft } from "react-bootstrap-icons";
+import { ChevronLeft, Plus } from "react-bootstrap-icons";
 import Notewrapper from "./notewrapper";
 import { useRef, useState } from "react";
 import Backbutton from "./backbutton";
@@ -21,7 +21,7 @@ export default function Projectdoc({
   const newcheckpointref = useRef()
   const [editconfirm, seteditconfirm] = useState(false)
   const [showconfirmedit, setshowconfirmedit] = useState(false)
-  
+
   const [newdata, setnewdata] = useState({
     target: target,
     newtitle: projecttitle,
@@ -52,10 +52,32 @@ export default function Projectdoc({
       }
     })
   }
+  async function editprojectname(targetchange,text) {
+    await setnewdata(item => ({
+      ...item,checkpoint: item.checkpoint.map((item, idx) =>
+        idx === targetchange ? { ...item, task: text } : item
+      )
+    }))
+    await setnote(prevNotes => {
+      if (Array.isArray(prevNotes)) {
+        return prevNotes.map(project => {
+          if (project && project._id) {
+            return project._id === target
+              ? {
+                ...project, checkpoint: project.checkpoint.map((item, idx) =>
+                  idx === targetchange ? { ...item, task: text } : item
+                )
+              }
+              : project;
+          }
+        });
+      }
+    })
+  }
   const datalength = newdata.checkpoint.filter(e => {
     return e.done === true
   })
-  function addproject() {
+  function addproject(text) {
     setnote(prevNotes => {
       if (Array.isArray(prevNotes)) {
         return prevNotes.map(project => {
@@ -65,22 +87,22 @@ export default function Projectdoc({
                 ...project,
                 checkpoint: [
                   ...project.checkpoint,
-                  { task: "done", done: false }
-                ]
+                  { task: text, done: false }
+                ], percentage: 0
               }
               : project;
           }
-          return project; // Always return the project even if conditions are not met
+          return project; 
         });
       }
-      return prevNotes; // Return the original if it's not an array
+      return prevNotes; 
     });
 
     setnewdata(item => ({
       ...item,
       checkpoint: [
         ...item.checkpoint,
-        { task: "done", done: false }
+        { task: text, done: false }
       ],
       percentage: 0
     }));
@@ -92,9 +114,9 @@ export default function Projectdoc({
     setshowconfirmedit(false)
     seteditmode(false)
   }
-  function editproject() {
+  function editproject(text) {
     if (datalength.length === 0) {
-      addproject()
+      addproject(text)
     } else {
       seteditmode(true)
       setshowconfirmedit(true)
@@ -117,7 +139,7 @@ export default function Projectdoc({
     >
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null} >
         {
-          showconfirmedit && <Confirmpopup text={"doing this will reset the progress of your project proceed ?"} confirmhandler={addproject} cancelhandler={() => setshowconfirmedit(false)} />
+          showconfirmedit && <Confirmpopup text={"doing this will reset the progress of your project proceed ?"} confirmhandler={() => addproject(newcheckpointref.current.value)} cancelhandler={() => setshowconfirmedit(false)} />
         }
       </AnimatePresence>
       <Backbutton closehandler={() => closehandler(newdata)} />
@@ -130,29 +152,33 @@ export default function Projectdoc({
       <div className="text-lg font-inter" >{projecttext} </div>
       <ul className="" >
         {newdata.checkpoint.map((e, i) => {
-
           return (
             !editmode ? <li key={e.task} className="mt-2" >
-              <label htmlFor={e.task} className={` ml-4 inline-block duration-300 w-[92%] border-4 shadow-[3px_3px_10px_black] ${e.done ? "border-green-500" : "border-red-600"} px-3 py-1`} >
+              <label htmlFor={i} className={` ml-4 inline-block duration-300 w-[92%] border-4 shadow-[3px_3px_10px_black] ${e.done ? "border-green-500" : "border-red-600"} px-3 py-1`} >
                 <span className={`text-xl ${e.done ? "text-green-500" : "text-red-600"} font-inter font-semibold`} > {e.task} </span>
-                <input onChange={() => updatenote(i)} className="bg-black/0" checked={!e.task} id={e.task} disabled={e.done} type="checkbox" value={e.task} />
+                <input onChange={() => updatenote(i)} className="bg-black/0 opacity-0" checked={!e.task} id={i} disabled={e.done} type="checkbox" value={e.task} />
               </label>
             </li> :
-            
               <li className="mb-2" >
-                <label htmlFor="newcheckpoint"> add new project </label>
-                <input value={e.task} data-id={i} type="text" name="editcheckpoint" id="editcheckpoint" />
+                <label className="text-base font-inter font-medium"  htmlFor={i}> edit checkpoint </label>
+                <input value={e.task} onChange={(e) => editprojectname(i,e.target.value)} className="py-1 ml-1 outline-none rounded-md border-2 border-black" data-id={i} type="text" name="editcheckpoint" id={i} />
               </li>
           )
         })}
-        <label htmlFor="newcheckpoint"> add new project </label>
-        <input type="text" ref={newcheckpointref} name="newcheckpoint" id="newcheckpoint" />
+        {editmode &&
+          <form className="flex justify-center  flex-col" >
+            <label className="flex justify-centers" htmlFor="newcheckpoint">
+              <h1 className="text-xl font-inter text-red-500 font-bold " >new checkpoint</h1>
+              <input type="text" className="py-1 ml-1 outline-none rounded-md border-2 border-black" ref={newcheckpointref} name="newcheckpoint" id="newcheckpoint" />
+              <button className="w-max bg-slate-100 ml-2 text-3xl py-1 px-1 shadow-[1px_1px_0_black]" onClick={(e) => {e.preventDefault();editproject(newcheckpointref.current.value)}} > <Plus /> </button>
+            </label>
+          </form>}
       </ul>
-      {editmode && <div className="w-[90vw] mt-3 ml-[17px] overflow-hidden h-14 bg-slate-400/50 rounded-xl" >
+      {!editmode && <div className="w-[90vw] mt-3 ml-[17px] overflow-hidden h-14 bg-slate-400/50 rounded-xl" >
         <div style={{ width: `${newdata.percentage}%` }} className={`duration-300 h-full ${totalpercent < 100 ? "bg-red-500" : "bg-green-500"} `}>
         </div>
       </div>}
-      <Editfooter editmode={editmode} updatenote={editproject} editmodeactive={editmodeactive} />
+      <Editfooter editmode={editmode} updatenote={() => seteditmode(false) } editmodeactive={editmodeactive} />
     </Notewrapper>
   );
 }

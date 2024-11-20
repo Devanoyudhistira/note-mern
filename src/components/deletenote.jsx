@@ -17,6 +17,7 @@ export default function Deletenote({ target,setfulldata,closehandler}) {
     }
     async function alertdelete(id) {        
         await toast.promise(deletebutton(id), {
+            loading:"deleting...",
             success: "note deleted",
             error: "delete failed",
         }, { className: "p-3 text-2xl font-bebas bg-blue-300" })
