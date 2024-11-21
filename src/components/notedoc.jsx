@@ -59,7 +59,7 @@ export default function Notedoc({
         <h1 className="font-poppins text-3xl font-bold ">
           {notetitle}
           <p className="font-inter text-sm  font-medium" >
-            {notetext.length} character
+            {newdata.newnote.length} character
           </p>
         </h1>
         <p className="font-inter text-sm  font-medium">

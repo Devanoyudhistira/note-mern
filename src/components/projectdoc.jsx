@@ -30,12 +30,12 @@ export default function Projectdoc({
 
   const [editmode, seteditmode] = useState(false)
   async function updatenote(targetchange) {
-    await setnewdata(item => ({
+     setnewdata(item => ({
       ...item, percentage: newdata.percentage + percentage, checkpoint: item.checkpoint.map((item, idx) =>
         idx === targetchange ? { ...item, done: true } : item
       ),
     }))
-    await setnote(prevNotes => {
+     setnote(prevNotes => {
       if (Array.isArray(prevNotes)) {
         return prevNotes.map(project => {
           if (project && project._id) {
@@ -51,6 +51,7 @@ export default function Projectdoc({
       }
     })
   }
+  
   async function editprojectname(targetchange,text) {
     await setnewdata(item => ({
       ...item,checkpoint: item.checkpoint.map((item, idx) =>
@@ -122,7 +123,6 @@ export default function Projectdoc({
     }
 
   }
-
 
   function editmodeactive() {
     seteditmode(true)

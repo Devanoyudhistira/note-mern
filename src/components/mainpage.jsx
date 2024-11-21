@@ -49,7 +49,7 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
     }
     async function todoupdate(newdata) {
         settodoopen(false)
-        await fetch("https://noteapi-pink.vercel.app/updateproject/", {
+        await fetch("https://noteapi-pink.vercel.app/updatetodolist/", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newdata)
@@ -93,6 +93,7 @@ export default function Mainpage({ image, name, logout, notedata, setnote }) {
                 {
                     todoopen && (
                         <Tododoc
+                            setnote={setnote}
                             closehandler={todoupdate}
                             task={tododata.task}
                             tododate={tododata.date}
