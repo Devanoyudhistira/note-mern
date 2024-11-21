@@ -134,7 +134,7 @@ export default function Projectdoc({
   const totalpercent = Math.ceil(newdata.percentage >= 100 ? 100 : newdata.percentage)
   return (
     <Notewrapper
-      notecolor="bg-orange-300"
+      notecolor="bg-orange-300 dark:bg-orange-500"
     >
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null} >
         {

@@ -6,7 +6,7 @@ import Todo from "./todo";
 export default function Sectionnote({ clickhandler,notedata, type, icon ,setnote,closehandler}) {
   return (
     <div id="horizontal" className="overflow-x-scroll relative">
-      <h1 className="absolute -top-2 font-bebas tracking-wider mt-2 text-xl">
+      <h1 className="absolute -top-2 dark:text-white font-bebas tracking-wider mt-2 text-xl">
         {" "}
         {type} {icon}{" "}
       </h1>

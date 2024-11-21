@@ -52,7 +52,7 @@ export default function Notedoc({
     })
   }
   return (
-    <Notewrapper notecolor="bg-red-300" >
+    <Notewrapper notecolor="bg-red-300 dark:bg-red-600" >
       { !editmode ? <Backbutton closehandler={closehandler} /> : <Backbutton closehandler={() => seteditmode(false)} /> }
       <div className="w-full flex items-center border-b-2 border-b-black justify-between">
         {" "}

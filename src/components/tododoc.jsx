@@ -97,7 +97,7 @@ export default function Tododoc({
   }
     return (
       <Notewrapper
-        notecolor="bg-blue-500"
+        notecolor="bg-blue-300 dark:bg-blue-500"
       >
         <Backbutton closehandler={() => closehandler(newdata)} />
         <div className="w-full mb-2 border-b-black border-b-2 grid grid-cols-2 items-center content-between justify-between" >
@@ -112,8 +112,11 @@ export default function Tododoc({
           {newdata.task.map((e, i) =>
             !editmode ?
               <li key={e.task} className="mt-2" >
-                <label key={e.task} htmlFor={i} className=" ml-4 inline-block" >
-                  <span className={`text-xl ${e.done ? "line-through" : ""} font-inter font-semibold`} > {e.task} </span>
+                <label key={e.task} htmlFor={i} className=" ml-4 flex items-center gap-2" >
+                  <span className="grid place-center p-1 w-max h-5 border-2 border-white rounded-full duration-300">
+                    <span className={`inline-block w-2 h-2 ${e.done ? "bg-white" : ""}  rounded-full duration-300`} > </span>
+                  </span>
+                  <span className={`text-xl peer ${e.done ? "line-through" : ""} font-inter font-semibold`} > {e.task} </span>
                   <input onChange={() => updatenote(i)} className="bg-black/0 opacity-0" checked={!e.done} id={i} disabled={e.done} type="checkbox" value={e.task} />
                 </label>
               </li> :

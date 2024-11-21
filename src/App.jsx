@@ -21,9 +21,7 @@ function App() {
         .then((result) => setnotedata(result));
     }
     if (isAuthenticated && userid !== null) {
-      setTimeout(() => {
         getnote();
-      }, 2000);
     }
   }, [isAuthenticated,userid]);
 
@@ -42,9 +40,10 @@ function App() {
       }
     ).then(res => res.json()).then((res) =>{
       setuserid(res.user.name)
-      sessionStorage.setItem("id",res.user.name)
+      localStorage.setItem("id",res.user.name)
       toast.success("welcome " + user.nickname)
       sethasfirstrender(false)
+      
     })}
     
   }
@@ -53,8 +52,8 @@ function App() {
   return (
     <div className="flex flex-col h-[95vh] justify-start px-2 items-center">
       <Toaster/>
-      {isAuthenticated ?
-        <Mainpage image={user.picture} setnote={setnotedata} name={user.name || user.nickname} logout={() => {sessionStorage.removeItem("id");logout({logoutParams: { returnTo: window.location.origin } })}} notedata={notedata}   /> :
+      {isAuthenticated  ?
+        <Mainpage image={user.picture} setnote={setnotedata} name={user.name || user.nickname} logout={() => {localStorage.removeItem("id");logout({logoutParams: { returnTo: window.location.origin } })}} notedata={notedata}   /> :
         <Loginpage loginWithRedirect={loginWithRedirect} />
       }
     </div>

@@ -13,7 +13,7 @@ export default function Todo({ list, objectid, title, clickhandler, closehandler
       <Deletenote target={objectid} setfulldata={setnotedata} closehandler={closehandler} />
       <div className="w-full flex justify-self-start -mt-2 text-xl self-start items-center align-center justify-between ">
         <h1 className="truncate text-xl ">{title}</h1>
-        {!tasklist.length === 0 ? (
+        {!tasklist.length <= 0 ? (
           <p className="text-lg font-inter font-extrabold">
             <span className="text-green-400">{list.filter((e) => e.done).length}/</span>
             <span className="text-red-600">{list.length}</span>
