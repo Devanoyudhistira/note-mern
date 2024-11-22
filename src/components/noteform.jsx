@@ -85,17 +85,17 @@ export default function Noteform({ closehandler, newdata, setform }) {
             <label htmlFor="notetext" className="font-inter font-medium dark:text-white text-xl" >what your document type</label>
             <div className="w-full justify-center items-center flex flex-col gap-3" >
               <Typeradio labelstyle={`hover:shadow-[1px_0_8px_colors.orange.500]
-       group  dark:has-[:checked]:shadow-[1px_0_8px_colors.orange.500] has-[:checked]:shadow-[1px_0_8px_colors.orange.500] hover:border-orange-500 has-[:checked]:bg-orange-500 has-[:checked]:bg-orange-500 dark:has-[:checked]:bg-orange-500`}
+       group  dark:has-[:checked]:shadow-[1px_0_8px_colors.orange.500] has-[:checked]:shadow-[1px_0_8px_colors.orange.500] hover:border-orange-500 hover:bg-orange-500/20 has-[:checked]:bg-orange-500/50 dark:has-[:checked]:bg-orange-500`}
                 inputstyle={``}
                 onchange={(e) => setnewnote(item => ({ ...item, type: e.target.value }))} identityvalue="project" />
               <Typeradio
                 labelstyle={`hover:shadow-[1px_0_8px_colors.blue.500]
-                group  dark:has-[:checked]:shadow-[1px_0_8px_colors.blue.500] has-[:checked]:shadow-[1px_0_8px_colors.blue.600] hover:border-blue-500 has-[:checked]:bg-blue-500 has-[:checked]:bg-blue-500 dark:has-[:checked]:bg-blue-500`}
+                group  dark:has-[:checked]:shadow-[1px_0_8px_colors.blue.500] has-[:checked]:shadow-[1px_0_8px_colors.blue.600] hover:border-blue-500 hover:bg-blue-500/20 has-[:checked]:bg-blue-500/50 dark:has-[:checked]:bg-blue-500`}
                 inputstyle={``}
                 onchange={(e) => setnewnote(item => ({ ...item, type: e.target.value }))} identityvalue="to-do-list" />
               <Typeradio 
               labelstyle={`hover:shadow-[1px_0_8px_colors.red.500]
-                group  dark:has-[:checked]:shadow-[1px_0_8px_colors.red.500] has-[:checked]:shadow-[1px_0_8px_colors.red.600] hover:border-red-500 has-[:checked]:bg-red-500 has-[:checked]:bg-red-500 dark:has-[:checked]:bg-red-500`}
+                group  dark:has-[:checked]:shadow-[1px_0_8px_colors.red.500] has-[:checked]:shadow-[1px_0_8px_colors.red.600] hover:border-red-500 hover:bg-red-500/20 has-[:checked]:bg-red-500/50 dark:has-[:checked]:bg-red-500`}
                 inputstyle={``}
               onchange={(e) => setnewnote(item => ({ ...item, type: e.target.value }))} identityvalue="note" />
             </div>

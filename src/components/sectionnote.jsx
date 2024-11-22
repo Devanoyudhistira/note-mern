@@ -29,7 +29,7 @@ export default function Sectionnote({ clickhandler,notedata, type, icon ,setnote
             return (
               e.list !== undefined && e.type === type && 
               <Todo closehandler={closehandler} setnotedata={setnote} objectid={e["_id"]}
-               clickhandler={() => clickhandler(e.agenda,e["date_created"],e.list,e["_id"]) } list={e.list} title={e.agenda} />
+               clickhandler={() => clickhandler(e.agenda,e["date_created"],e.list,e["_id"]) } list={e.list} title={e.agenda} /> 
             );
           }
         })}

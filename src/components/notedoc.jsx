@@ -67,11 +67,11 @@ export default function Notedoc({
           {notedate}  {" "}
         </p>
       </div>
-      {!editmode && <div id="notedoc" className="ml-1 h-screen overflow-scroll w-screen text-start px-1 break-words" >
+      {!editmode && <div id="notedoc" className="ml-1 h-screen pb-3 overflow-scroll w-screen text-start px-1 break-words" >
         <span className="text-lg font-inter text-start" >{newdata.newnote} </span>
       </div>}
       {editmode && <div>
-        <textarea autoFocus value={newdata.newnote} ref={noteedit} className="w-[97%] ml-2 h-[80vh] justify-self-center resize-none border-none bg-black/0 outline-none" onChange={(e) => setnewdata(item => ({ ...item, newnote: e.target.value }))} name="text-edit" id="text-edit"></textarea>
+        <textarea autoFocus value={newdata.newnote} ref={noteedit} className="w-[97%] pb-3 ml-2 h-[80vh] justify-self-center resize-none border-none bg-black/0 outline-none" onChange={(e) => setnewdata(item => ({ ...item, newnote: e.target.value }))} name="text-edit" id="text-edit"></textarea>
       </div>}
       <Editfooter editmode={editmode} updatenote={updatenote} editmodeactive={editmodeactive} />
     </Notewrapper>
