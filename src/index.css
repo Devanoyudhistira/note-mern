@@ -16,7 +16,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   }
   
   
-  #horizontal,textarea {
+  #horizontal,textarea,#notedoc {
     -ms-overflow-style: none;  
     scrollbar-width: none;  
   }  

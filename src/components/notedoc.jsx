@@ -67,7 +67,7 @@ export default function Notedoc({
           {notedate}  {" "}
         </p>
       </div>
-      {!editmode && <div id="notedoc" className="ml-1 overflow-y-scroll w-screen text-start px-1 break-words" >
+      {!editmode && <div id="notedoc" className="ml-1 h-screen overflow-scroll w-screen text-start px-1 break-words" >
         <span className="text-lg font-inter text-start" >{newdata.newnote} </span>
       </div>}
       {editmode && <div>
