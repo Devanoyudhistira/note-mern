@@ -9,8 +9,8 @@ export default function Confirmpopup({ text, confirmhandler, cancelhandler }) {
         initial={{ scale: 0 }}
         exit={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1 }}
-         className="bg-white flex flex-col w-max left-[30%] py-2 px-3 border-4 shadow-[4px_4px_0_black] absolute z-[100] top-2/4 border-red-600 " >
-            <button className="text-3xl w-min px-1 py-1 rounded-full bg-red-600" onClick={cancelhandler}> <X /> </button>
+         className="bg-white flex flex-col w-[90vw] left-[5%] py-2 px-3 border-4 shadow-[4px_4px_0_black] absolute z-[100] top-2/4 border-red-600 " >
+            <button className="text-lg -ml-3 -mt-1 w-min px-1 py-1 rounded-full bg-red-600" onClick={cancelhandler}> <X /> </button>
             <div className="flex flex-col" >
                 <h1 className="text-xl font-bold font-inter" >{text}</h1>
                 <div className="flex gap-3 w-full mt-3 justify-center font-inter font-semibold text-xl" >

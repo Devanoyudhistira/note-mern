@@ -108,7 +108,7 @@ export default function Tododoc({
           </h2>
           <p className="text-lg font-poppins font-light" > {tododate} </p>
         </div>
-        <ul>
+        <ul className="document py-2 px-1 overflow-sroll"  >
           {newdata.task.map((e, i) =>
             !editmode ?
               <li key={e.task} className="mt-2" >
@@ -122,14 +122,14 @@ export default function Tododoc({
               </li> :
               <li className="mb-2" >
                 <label className="text-base font-inter font-medium" htmlFor={i}> edit task </label>
-                <input value={e.task} onChange={(e) => editprojectname(i, e.target.value)} className="py-1 ml-1 outline-none rounded-md border-2 border-black" data-id={i} type="text" name="editcheckpoint" id={i} />
+                <input value={e.task} onChange={(e) => editprojectname(i, e.target.value)} className="py-1 px-2 ml-1 outline-none rounded-md border-2 border-black" data-id={i} type="text" name="editcheckpoint" id={i} />
               </li>
           )}
           {editmode &&
           <form className="flex justify-center  flex-col" >
             <label className="flex justify-centers" htmlFor="newcheckpoint">
               <h1 className="text-xl font-inter text-red-500 font-bold " >new task</h1>
-              <input type="text" autoFocus className="py-1 ml-1 outline-none rounded-md border-2 border-black" ref={newcheckpointref} name="newcheckpoint" id="newcheckpoint" />
+              <input type="text" autoFocus className="py-1 ml-1 outline-none px-2 rounded-md border-2 border-black" ref={newcheckpointref} name="newcheckpoint" id="newcheckpoint" />
               <button className="w-max bg-slate-100 ml-2 text-3xl py-1 px-1 shadow-[1px_1px_0_black]" onClick={(e) => {e.preventDefault();addproject(newcheckpointref.current.value)}} > <Plus /> </button>
             </label>
           </form>}

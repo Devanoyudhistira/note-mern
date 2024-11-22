@@ -62,7 +62,7 @@ export default function Notedoc({
             {newdata.newnote.length} character
           </p>
         </h1>
-        <p className="font-inter text-sm  font-medium">
+        <p className="font-inter -mt-12 mr-3 text-sm w-max font-medium ">
           {" "}
           {notedate}  {" "}
         </p>

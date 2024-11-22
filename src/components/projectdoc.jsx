@@ -149,7 +149,7 @@ export default function Projectdoc({
         <p className="text-lg font-poppins font-light" > {projectdate} </p>
       </div>
       <div className="text-lg font-inter" >{projecttext} </div>
-      <ul className="" >
+      <ul className="document  py-2 px-1 overflow-sroll" >
         {newdata.checkpoint.map((e, i) => {
           return (
             !editmode ? <li key={e.task} className="mt-2" >
@@ -160,7 +160,7 @@ export default function Projectdoc({
             </li> :
               <li className="mb-2" >
                 <label className="text-base font-inter font-medium"  htmlFor={i}> edit checkpoint </label>
-                <input value={e.task} onChange={(e) => editprojectname(i,e.target.value)} className="py-1 ml-1 outline-none rounded-md border-2 border-black" data-id={i} type="text" name="editcheckpoint" id={i} />
+                <input value={e.task} onChange={(e) => editprojectname(i,e.target.value)} className="py-1 px-2 ml-1 outline-none rounded-md border-2 border-black" data-id={i} type="text" name="editcheckpoint" id={i} />
               </li>
           )
         })}
@@ -168,7 +168,7 @@ export default function Projectdoc({
           <form className="flex justify-center  flex-col" >
             <label className="flex justify-centers" htmlFor="newcheckpoint">
               <h1 className="text-xl font-inter text-red-500 font-bold " >new checkpoint</h1>
-              <input type="text" autoFocus className="py-1 ml-1 outline-none rounded-md border-2 border-black" ref={newcheckpointref} name="newcheckpoint" id="newcheckpoint" />
+              <input type="text" autoFocus className="py-1 px-2 ml-1 outline-none rounded-md border-2 border-black" ref={newcheckpointref} name="newcheckpoint" id="newcheckpoint" />
               <button className="w-max bg-slate-100 ml-2 text-3xl py-1 px-1 shadow-[1px_1px_0_black]" onClick={(e) => {e.preventDefault();editproject(newcheckpointref.current.value)}} > <Plus /> </button>
             </label>
           </form>}
