@@ -160,7 +160,7 @@ export default function Projectdoc({
             </li> :
               <li className="mb-2" >
                 <label className="text-base font-inter font-medium"  htmlFor={i}> edit checkpoint </label>
-                <input value={e.task} onChange={(e) => editprojectname(i,e.target.value)} className="py-1 px-2 ml-1 outline-none rounded-md border-2 border-black" data-id={i} type="text" name="editcheckpoint" id={i} />
+                <input value={e.task} onChange={(e) => editprojectname(i,e.target.value)} className="py-1 px-2 pr-4 ml-1 outline-none rounded-md border-2 border-black" data-id={i} type="text" name="editcheckpoint" id={i} />
               </li>
           )
         })}
